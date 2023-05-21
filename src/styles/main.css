@@ -1,1 +1,26 @@
-@import './home.css'
+html, body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    
+}
+
+.main__app {
+    background-color: rgb(186, 73, 73);
+}
+
+.nav__container {
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+}
+
+.nav__menu-item {
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    margin: 0 8px;
+    padding: 4px 10px;
+    border-radius: 5px;
+    opacity: 0.9;
+    font-size: 13px;
+    align-items: center;
+}
