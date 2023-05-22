@@ -14,5 +14,5 @@ code {
 
 
 
-@import url('./styles/main.css');
+@import url('./styles/main.scss');
 @import './styles/tailwind.css';
