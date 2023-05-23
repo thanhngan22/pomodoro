@@ -55,7 +55,8 @@ export class CBaseItem implements IBaseItem {
     const listItems = this.content.listNum?.map((item, index) => {
       return (
         <li key={index}>
-        <h3>{index+1}. {item.heading}</h3>
+          {index+1}.
+        <h3> {item.heading}</h3>
         <span>{item.description}</span>
       </li>
       )

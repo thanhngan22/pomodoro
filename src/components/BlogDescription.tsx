@@ -1,5 +1,5 @@
 import desc from "../data/blog.json";
-import { CItemsDesc, IBaseItem } from "../inteface";
+import { CItemsDesc, IBaseItem } from "../interface";
 
 export default function Blog_Description() {
   const elements = new CItemsDesc(desc.items as IBaseItem[]).getJSX();
