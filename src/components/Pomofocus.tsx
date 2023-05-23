@@ -1,50 +1,69 @@
-
+import threeDotsIcon from "../assets/icons/3dots.png";
+import plusIcon from "../assets/icons/plus.png";
+import threeDotsBlackIcon from "../assets/icons/3dots.black.png";
 
 export default function Pomofocus() {
-    return (
-        <div className="pomo__container flex flex-col pb-80 pt-10 px-16 text-white  ">
-            <div className="display__timer px-20 items-center flex flex-col">
-                <div className="pomo__break-types pt-4">
-                    <button  className="pomodoro__main-btn pomo__types-btn mr-3 ">
-                        Pomodoro
-                    </button>
-                    <button className="Short__Break-btn pomo__types-btn mx-4">
-                        Short Break
-                    </button>
-                    <button className="Long__Break-btn pomo__types-btn ml-3">
-                        Long Break
-                    </button>
-                </div>
-                <div className="time__remaining py-10 text-9xl">
-                        25:00
-                </div>
-                <div className="start__button-container">
-                    <button className="start__button">START</button>
-                </div>
-            </div>
-            <div className="target__heading">
-                <div className="current__task">
-                    #1
-                </div>
-                <h1 className="target__heading-title">
-                    Time to focus !
-                </h1>
-            </div>
-            <div className="tasks__menu flex justify-between">
-                <h2>Tasks</h2>
-                <button className="action__tasks">
-                    ...
-                    </button>                    
-            </div>
-            <div className="add__task">
-                <button className="add__task-btn">
-                    Add Task
-                </button>
-            </div>
-            <div className="tasks__list">
-
-            </div>
-
+  return (
+    <div className="pomo__container flex flex-col pb-20 pt-10 px-20 text-white  ">
+      <div className="display__timer px-20 items-center flex flex-col">
+        <div className="pomo__break-types pt-4">
+          <button className="pomodoro__main-btn pomo__types-btn -ml-3 ">
+            Pomodoro
+          </button>
+          <button className="Short__Break-btn pomo__types-btn ">
+            Short Break
+          </button>
+          <button className="Long__Break-btn pomo__types-btn -mr-3">
+            Long Break
+          </button>
         </div>
-    )
+        <div className="time__remaining py-8 text-8xl">25:00</div>
+        <div className="start__button-container mb-8 ">
+          <button className="start__button">START</button>
+        </div>
+      </div>
+      <div className="target__heading text-center py-4">
+        <div className="current__task opacity-70 text-l">#1</div>
+        <h1 className="target__heading-title">Time to focus !</h1>
+      </div>
+      <div className="tasks__menu flex justify-between pb-5 border-b border-gray-300">
+        <h2 className="font-medium text-xl">Tasks</h2>
+        <button className="tasks__menu-action px-3 py-3 ">
+          <img src={threeDotsIcon} alt="thee-dots-icon" className="w-4 h-4" />
+        </button>
+      </div>
+      <div className="tasks__list my-5">
+        <div className="task__item flex justify-between">
+          <div className="checkIcon__container">
+           
+          </div>
+          <div className="task__content"></div>
+          <div className="task__config">
+            <span className="task__count"></span>
+            <button className="border rounded px-1.5 py-1.5   ">
+              <img
+                src={threeDotsBlackIcon}
+                alt="thee-dots-black-icon"
+                className="w-4 h-4 opacity-40 task__config-icon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="add__task  ">
+        <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80">
+          <img
+            src={plusIcon}
+            alt="plus-icon"
+            className="self-center w-4 h-4 mr-2  "
+          />
+          <span className="self-center">Add Task</span>
+        </button>
+      </div>
+      <div className="more__inf text-center">
+        Pomos: <span></span>
+        Finish At: <span></span>
+      </div>
+    </div>
+  );
 }
