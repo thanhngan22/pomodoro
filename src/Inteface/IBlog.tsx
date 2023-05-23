@@ -1,41 +1,28 @@
-export interface IBaseContentStruct {
-    // nothing
-}
-
-export interface ITypePara extends IBaseContentStruct {
-    para: string;
-}
-
-export interface ITypeListNum extends IBaseContentStruct {
-    list: string[];
-}
-
 export interface IItemBullet {
-    heading : string;
-    description: string;
-}
-
-export interface ITypeListBullet extends IBaseContentStruct {
-    list: IItemBullet[];
+  heading: string;
+  description: string;
 }
 
 export interface IItemBulletWithLink extends IItemBullet {
-    url: string;
-
+  url: string;
 }
 
-export interface ITypeListBulletWithLink extends IBaseContentStruct {
-    list: IItemBulletWithLink[];
+export interface IProps {
+    para?: string;
+    listNum?: string[];
+    listBullet?: IItemBullet[];
+    listBulletWithLink?: IItemBulletWithLink[];
 }
 
 export interface IBaseItem {
-    subTittle: string;
-    content_type: string;
-    content: IBaseContentStruct;
+  id?: number;
+  subTittle: string;
+  content_type: string;
+  content: IProps;
+  highLightWords?: string[];
+  highLightWordsLink?: string[];
+  
 }
 
-export interface IItemFull extends IBaseItem {
-    highLightWords : string[];
-    highLightWordsLink : string[];
 
-}
+

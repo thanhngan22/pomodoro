@@ -9,6 +9,8 @@ export * from "./IReminder";
 
 // interface Blog/Description
 export * from "./IBlog";
+export * from "./CItemsDesc";
+export * from "./CBaseItem";
 
 
 
