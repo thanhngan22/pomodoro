@@ -19,12 +19,30 @@
             "subTittle": "How to use Pomodoro Timer?",
             "content_type": "List-Number",
             "content": [
-                "Add tasks to work on today",
-                "Set estimate pomodoros (1 = 25min of work) for each tasks",
-                "Select a task to work on",
-                "Start timer and focus on the task for 25 minutes",
-                "Take a break for 5 minutes when the alarm ring",
-                "Iterate 3-5 until you finish the tasks"
+                {
+                    "heading": "Add tasks",
+                    "description": "to work on today"
+                },
+                {
+                    "heading": "Set estimate pomodoros",
+                    "description": "(1 = 25min of work) for each tasks"
+                },
+                {
+                    "heading": "Select a task",
+                    "description": "to work on"
+                },
+                {
+                    "heading": "Start timer",
+                    "description": "and focus on the task for 25 minutes"
+                },
+                {
+                    "heading": "Take a break",
+                    "description": "for 5 minutes when the alarm ring"
+                },
+                {
+                    "heading": "Iterate 3-5",
+                    "description": "until you finish the tasks"
+                }
             ]
         }, 
         {
