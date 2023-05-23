@@ -2,6 +2,8 @@ import React from "react";
 
 import Nav from "./modules/nav";
 import Pomofocus from "./Pomofocus";
+import BlogDescription from "./BlogDescription";
+import Footer from "./Footer";
 
 export default function Home() {
   return (
@@ -12,10 +14,8 @@ export default function Home() {
           <Pomofocus />
         </ul>
       </div>
-      <div className="description w-screen h-80 bg-green-300">
-        Description here
-      </div>
-      <div className="footer w-screen h-80 bg-yellow-600">Footer here</div>
+      <BlogDescription />
+      <Footer />
     </div>
   );
 }

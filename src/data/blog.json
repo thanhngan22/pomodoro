@@ -1,0 +1,100 @@
+{
+    "tittle" : "An online Pomodoro Timer to boost your productivity",
+    "items" : [
+        {
+            "subTittle": "What is Pomofocus?",
+            "content-type": "paragraph",
+            "content": "Pomofocus is a customizable pomodoro timer that works on desktop & mobile browser. The aim of this app is to help you focus on any task you are working on, such as study, writing, or coding. This app is inspired by Pomodoro Technique which is a time management method developed by Francesco Cirillo.",
+            "highLightWords": ["Pomodoro Technique"],
+            "highLightWordsLink": ["https://francescocirillo.com/products/the-pomodoro-technique"]
+        },
+        {
+            "subTittle": "What is Pomodoro Techinique?",
+            "content-type": "paragraph",
+            "content": "The Pomodoro Technique is created by Francesco Cirillo for a more productive way to work and study. The technique uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a pomodoro, from the Italian word for 'tomato', after the tomato-shaped kitchen timer that Cirillo used as a university student. - Wikipedia",
+            "highLightWords": ["Wikipedia"],
+            "highLightWordsLink": ["https://en.wikipedia.org/wiki/Pomodoro_Technique"]
+        },
+        {
+            "subTittle": "How to use Pomodoro Timer?",
+            "content-type": "List-Number",
+            "content": [
+                "Add tasks to work on today",
+                "Set estimate pomodoros (1 = 25min of work) for each tasks",
+                "Select a task to work on",
+                "Start timer and focus on the task for 25 minutes",
+                "Take a break for 5 minutes when the alarm ring",
+                "Iterate 3-5 until you finish the tasks"
+            ]
+        }, 
+        {
+            "subTittle": "Basic Features",
+            "content-type": "List-Dot",
+            "content": [
+                {
+                    "heading": "estimate Finish Time",
+                    "description": "Get an estimate of the time required to complete your daily tasks."
+                },
+                {
+                    "heading": "Add Templates",
+                    "description": "Save your repetitive tasks as templates and add them with just one click."
+                },
+                {
+                    "heading": "Visual Reports",
+                    "description": "See how much time you've focused each day, week, and month."
+                },
+                {
+                    "heading": "Custom Settings",
+                    "description": "Personalize your focus/break time, alarm sounds, background sounds, and more."
+                }
+            ]
+        },
+        {
+            "subTittle": "Premium Features",
+            "content-type": "List-Dot",
+            "content": [
+                {
+                    "heading": "Add Projects",
+                    "description": "Track how much time you spend on each project."
+                },
+                {
+                    "heading": "Yearly Reports",
+                    "description": "View your focus hours for each year."
+                },
+                {
+                    "heading": "Download Reports",
+                    "description": "Download your focus history in CSV format."
+                },
+                {
+                    "heading": "No Template Limit",
+                    "description": "Save more than 3 templates."
+                },
+                {
+                    "heading": "Todoist Integration",
+                    "description": "Load tasks from your Todoist account."
+                },
+                {
+                    "heading": "No Ads",
+                    "description": "Enjoy a clean and distraction-free app experience."
+                }
+            ]
+        },
+        {
+            "subTittle": "Download App",
+            "content-type": "List-Dot/Link",
+            "content": [
+                {
+                    "heading": "For macOS",
+                    "description": "(zip file) *Right click the icon to open",
+                    "url": "https://pomofocus.io/downloadable/pomofocus-darwin-x64-1.1.0.zip"
+                },
+                {
+                    "heading": "For Windows",
+                    "description": "(zip file)",
+                    "url": "https://pomofocus.io/downloadable/pomofocus-1.1.0-setup.zip"
+                }
+            ]
+        }
+    ]
+
+}
