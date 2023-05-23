@@ -1,3 +1,4 @@
+/* css common */
 html,
 body {
   overflow-x: hidden;
@@ -9,6 +10,7 @@ body {
   background-color: rgb(186, 73, 73);
 }
 
+/* navbar */
 .nav__container {
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
 }
@@ -23,6 +25,8 @@ body {
   font-size: 13px;
   align-items: center;
 }
+
+/* main app*/
 
 .pomo__container {
   .display__timer {
@@ -104,4 +108,35 @@ body {
     background-color: rgba(255, 255, 255, 0.15);
     padding: 20px;
   }
+}
+
+/* blog | description */
+
+
+/* footer */
+.footer {
+  padding: 28px 0 20px 0;
+  border-top: 0.5px solid rgba(0, 0, 0, 0.2);
+  background-color: white;
+
+  .footer__container {
+    max-width: 600px;
+  }
+
+  .footer__contact-logo {
+    width: 40px;
+    height: 40px;
+    margin: 0 px;
+    margin: 12px 6px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #999999;
+    padding: 6px;
+  }
+
+  .footer__nav-item {
+    padding: 0 6px;
+    font-size: 14px;
+  }
+
 }
