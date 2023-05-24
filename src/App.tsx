@@ -1,3 +1,11 @@
-import App from './components/index'
+import router from './components/index'
+import {RouterProvider} from 'react-router-dom'
 
-export default App;
+
+export default function App() {
+    return (
+        <div className="App">
+            <RouterProvider router = {router} />
+        </div>
+    )
+}

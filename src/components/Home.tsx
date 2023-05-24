@@ -7,7 +7,7 @@ import Footer from "./Footer";
 
 export default function Home() {
   return (
-    <div className="container w-full h-full ">
+    <div id="home__page" className="container w-full h-full ">
       <div className="main__app  w-screen min-h-full flex justify-center ">
         <ul className="main__app-container h-full    ">
           <Nav />
