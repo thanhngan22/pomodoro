@@ -12,5 +12,10 @@ export * from "./IBlog";
 export * from "./CItemsDesc";
 export * from "./CBaseItem";
 
+// privacy
+export * from "./IPrivacy";
+export * from "./CPrivacyItems";
+export * from "./CPrivacyItem";
+
 
 

@@ -19,7 +19,7 @@ const router = createBrowserRouter([
 
     },
     {
-        path: "/simplepage",
+        path: "/app",
         element: <SimplePage/>,
     },
     {

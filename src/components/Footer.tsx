@@ -7,16 +7,16 @@ export default function Footer() {
     <div className="footer w-screen ">
       <div className="footer__container m-auto ">
         <ul className="footer__nav flex justify-center font-semibold text-l text-yellow-900 ">
-          <a href="#" className="footer__nav-item">
+          <a href="/" className="footer__nav-item">
             HOME
           </a>
-          <a href="#" className="footer__nav-item">
+          <a href="/privacy" className="footer__nav-item">
             PRIVACY
           </a>
-          <a href="#" className="footer__nav-item">
+          <a href="mailto:pomofocus@gmail.com" className="footer__nav-item">
             CONTACT
           </a>
-          <a href="#" className="footer__nav-item">
+          <a href="/app" className="footer__nav-item">
             SIMPLE PAGE
           </a>
         </ul>

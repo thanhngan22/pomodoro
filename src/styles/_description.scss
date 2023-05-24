@@ -1,0 +1,109 @@
+/* blog | description */
+.blogDescription__container {
+    margin: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  
+    .desc__wrap {
+      max-width: 640px;
+      padding: 4px;
+  
+      .description__tittle {
+        max-width: 640px;
+        color: #541C1F;
+        font-size: 34px;
+        font-weight: 600;
+        padding-bottom:20px;
+    
+      }
+    
+      .description__main {
+        max-width: 640px;;
+  
+  
+        .desc__item {
+          color: #785E60;
+          font-size: 16px;
+  
+          .desc__item-para {
+            > a {
+              color: hsl(2, 66%, 58%);
+              font-weight: 600;
+            }
+          }
+  
+  
+           .desc__item-subTittle {
+            color: #541C1F;
+            font-size: 24px;
+            font-weight: 600;
+            padding: 30px 0 20px 0;
+  
+            &::after {
+              content: "";
+              display: block;
+              width: 28px;
+              border-bottom: 4px solid #f05b56;
+              opacity: 0.5;
+              margin-top: 8px;
+            }
+          }
+  
+          .desc__item-listNum {
+            list-style: none;
+            padding-left: 12px;
+  
+            > li {
+              padding-bottom: 10px ;
+  
+              > h3 {
+                font-weight: 600;
+                display: inline-block;
+                padding-right: 6px;
+                padding-left: 4px;
+              }
+            }
+          }
+  
+          .desc__item-listBullet {
+            padding-left: 8px;
+            > li {
+              padding: 4px 0;
+  
+              &::marker {
+                  color: hsl(357, 74%, 67%);
+              
+              }
+  
+              > h3 {
+                font-weight: 600;
+                font-size: 18px;
+                display: inline-block;
+              }
+  
+              > span {
+                padding-left: 6px;
+              }
+  
+              > a {
+                font-size: 18px;
+                color: hsl(2, 66%, 58%);
+                font-weight: 600;
+              }
+            }
+  
+            
+          
+          }
+  
+        }
+    
+      }
+    }
+  
+  
+  }
+  
+  
