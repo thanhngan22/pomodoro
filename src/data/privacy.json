@@ -28,8 +28,9 @@
                 {
                     "heading": "Usage Data",
                     "type": "paragraphs",
-                    "para": "We may also collect information on how the Service is accessed and used (\"Usage Data\"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data."
-
+                    "paras": [
+                        "We may also collect information on how the Service is accessed and used (\"Usage Data\"). This Usage Data may include information such as your computer's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages, unique device identifiers and other diagnostic data."
+                    ]
                 },
                 {
                     "heading": "Tracking & Cookies Data",
@@ -57,7 +58,7 @@
             ]
         },
         {
-            "heading": "Use of Data",
+            "heading": "Use Of Data",
             "type": "paragraph|list",
             "para": "Pomofocus uses the collected data for various purposes:",
             "list": [
@@ -82,6 +83,7 @@
         },
         {
             "heading": "Disclosure Of Data",
+            "subheading": "Legal Requirements",
             "type": "paragraph|list",
             "para": "Pomofocus may disclose your Personal Data in the good faith belief that such action is necessary to:",
             "list": [
@@ -96,8 +98,7 @@
             "heading": "Security Of Data",
             "type": "paragraphs",
             "paras": [
-                "The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure.",
-                "While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security."
+                "The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security."
             ]
         },
         {
@@ -120,7 +121,7 @@
         {
             "heading": "Contact Us",
             "type": "paragraph|mail",
-            "para": "If you have any questions about this Privacy Policy, please contact us:",
+            "para": "If you have any questions about this Privacy Policy, please contact us by sending email to:",
             "mail": "pomofocus@gmail.com"
         }
     ]

@@ -12,9 +12,8 @@ export class CPrivacyItems  {
 
     getJSX(): JSX.Element[] {
         const jsx = this.posts.map((item, index) => {
-            const className = item.post.heading.split(" ").join("_");
             return (
-                <div key={index} className={className}>
+                <div>
                     {item.getInnerHTML()}
                 </div>
             )
