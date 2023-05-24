@@ -8,6 +8,8 @@ export class CBaseItem implements IBaseItem {
   subTittle: string;
   content_type: string;
   content: IProps = {};
+  highLightWords?: string[];
+  highLightWordsLink?: string[];
 
   // constructor
   constructor(data: any) {
@@ -17,23 +19,28 @@ export class CBaseItem implements IBaseItem {
     this.id = CBaseItem.instanceCount;
     this.subTittle = data.subTittle;
     this.content_type = data.content_type;
-    
-    switch (this.content_type) {
-        case "paragraph":
-            this.content.para = data.content;
-            break;
-        case "List-Number":
-            this.content.listNum = data.content;
-            break;
-        case "List-Bullet":
-            this.content.listBullet = data.content;
-            break;
-        case "List-Bullet/Link":
-            this.content.listBulletWithLink = data.content;
-            break;
-        default:
-            break;
 
+    switch (this.content_type) {
+      case "paragraph":
+        this.content.para = data.content;
+        this.highLightWords = data.highLightWords;
+        this.highLightWordsLink = data.highLightWordsLink;
+        // config para with highlight words
+  
+
+
+        break;
+      case "List-Number":
+        this.content.listNum = data.content;
+        break;
+      case "List-Bullet":
+        this.content.listBullet = data.content;
+        break;
+      case "List-Bullet/Link":
+        this.content.listBulletWithLink = data.content;
+        break;
+      default:
+        break;
     }
 
     // console.log("id: ", this.id);
@@ -43,10 +50,27 @@ export class CBaseItem implements IBaseItem {
   }
 
   getJSXPara() {
+
+    const content = this.content.para;
+    const highLightWords = this.highLightWords;
+    const highLightWordsLink = this.highLightWordsLink;
+    let highlightedContent = content;
+
+    if (highLightWords && highLightWordsLink) {
+      highLightWords.forEach((word, index) => {
+        const regex = new RegExp(word, "gi");
+        const url = highLightWordsLink[index];
+        const tag = `<a href="${url}" target="_blank" className="highlighted">${word}</a>`;
+        highlightedContent = highlightedContent?.replace(regex, tag);
+      });
+    }
+
+    const data =  highlightedContent? <p className="desc__item-para" dangerouslySetInnerHTML={{ __html: highlightedContent }} /> : <p className="desc__item-para">{content}</p>;
+
     return (
       <div className="desc__item" key={this.id}>
         <h2 className="desc__item-subTittle">{this.subTittle}</h2>
-        <p className="desc__item-para">{this.content.para}</p>
+        {data}
       </div>
     );
   }
@@ -55,11 +79,10 @@ export class CBaseItem implements IBaseItem {
     const listItems = this.content.listNum?.map((item, index) => {
       return (
         <li key={index}>
-          {index+1}.
-        <h3> {item.heading}</h3>
-        <span>{item.description}</span>
-      </li>
-      )
+          {index + 1}.<h3> {item.heading}</h3>
+          <span>{item.description}</span>
+        </li>
+      );
     });
     return (
       <div className="desc__item" key={this.id}>

@@ -139,6 +139,13 @@ body {
         color: #785E60;
         font-size: 16px;
 
+        .desc__item-para {
+          > a {
+            color: hsl(2, 66%, 58%);
+            font-weight: 600;
+          }
+        }
+
 
          .desc__item-subTittle {
           color: #541C1F;
