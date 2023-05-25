@@ -13,6 +13,7 @@ export default function Pomofocus() {
   let timeStart = "25:00";
 
   const User = new CUserSetting();
+  // console.log("User setting: ", JSON.stringify(User, null, 2))
   const mode = new CMode();
 
   useEffect(() => {

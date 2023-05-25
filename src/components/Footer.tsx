@@ -2,23 +2,25 @@ import fbIcon from "../assets/icons/facebook.png";
 import twitterIcon from "../assets/icons/twitter.png";
 import stripeClimateBadge from "../assets/icons/stripe-climate-badge.png";
 
+import { Link } from "react-router-dom";
+
 export default function Footer() {
   return (
     <div className="footer w-screen ">
       <div className="footer__container m-auto ">
         <ul className="footer__nav flex justify-center font-semibold text-l text-yellow-900 ">
-          <a href="/" className="footer__nav-item">
+          <Link to="/" className="footer__nav-item">
             HOME
-          </a>
-          <a href="/privacy" className="footer__nav-item">
+          </Link>
+          <Link to="/privacy" className="footer__nav-item">
             PRIVACY
-          </a>
-          <a href="mailto:pomofocus@gmail.com" className="footer__nav-item">
+          </Link>
+          <Link to="mailto:pomofocus@gmail.com" className="footer__nav-item">
             CONTACT
-          </a>
-          <a href="/app" className="footer__nav-item">
+          </Link>
+          <Link to="/app" className="footer__nav-item">
             SIMPLE PAGE
-          </a>
+          </Link>
         </ul>
         <div className="footer__contact flex justify-center">
           <a href="https://www.facebook.com/pomofocus" className="footer__contact-logo ">
