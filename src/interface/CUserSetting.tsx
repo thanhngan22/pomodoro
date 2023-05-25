@@ -1,4 +1,4 @@
-import { ISettings, ITimer, ISound, ITheme, IReminder, ISoundProps } from ".";
+import { ISettings, ITimer, ISound, ITheme, IReminder, ISoundProps, CListTasks } from ".";
 
 export class CUserSetting implements ISettings {
   // attributes
@@ -6,6 +6,7 @@ export class CUserSetting implements ISettings {
   sound: ISound;
   theme: ITheme;
   notification: IReminder;
+  todolist : CListTasks
 
   // default constructor
   constructor() {
@@ -55,6 +56,7 @@ export class CUserSetting implements ISettings {
       alarmRepeat: 0,
       tickingVolume: 0,
     };
+    this.todolist = new CListTasks();
   }
 
   //   methods for timer

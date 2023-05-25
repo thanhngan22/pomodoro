@@ -17,11 +17,21 @@ export default function Pomofocus() {
 
   useEffect(() => {
     mode.setMode("pomodoro");
-  }, [])
+  }, []);
 
   function handleOnclickTypesPomo(modeName: string) {
     mode.setMode(modeName);
     return undefined;
+  }
+
+  function changeTextStartBtn() {
+    const startBtn = document.querySelector(".start__button");
+    if (!startBtn) return;
+    if (startBtn.innerHTML === "START") {
+      startBtn.innerHTML = "PAUSE";
+    } else {
+      startBtn.innerHTML = "START";
+    }
   }
 
   return (
@@ -49,7 +59,13 @@ export default function Pomofocus() {
         </div>
         <div className="time__remaining py-8 text-8xl">{timeStart}</div>
         <div className="start__button-container mb-8 ">
-          <button className="start__button">START</button>
+          <button
+            onClick={() => changeTextStartBtn()}
+            className="start__button"
+          >
+            START
+          </button>
+          <button className="next__mode-btn"></button>
         </div>
       </div>
       <div className="target__heading text-center py-4">

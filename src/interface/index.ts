@@ -24,5 +24,7 @@ export * from "./CPrivacyItem";
 // modes
 export * from "./CMode";
 
+// task and list tasks
+export * from "./CListTasks";
 
 
