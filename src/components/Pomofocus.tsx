@@ -1,8 +1,33 @@
+// hooks
+import {useState} from "react";
+
+// svg and icons
 import threeDotsIcon from "../assets/icons/3dots.png";
 import plusIcon from "../assets/icons/plus.png";
 import threeDotsBlackIcon from "../assets/icons/3dots.black.png";
 
+// interfaces and classes
+import { CUserSetting, CMode, IMode } from "../interface";
+
+
+
+
 export default function Pomofocus() {
+
+
+
+  const User = new CUserSetting();
+  const [mode, setMode] = useState(new CMode());
+
+
+
+  function handleOnclickTypesPomo (modeName: string) {
+    
+}
+
+
+
+
   return (
     <div id="app" className=" pomo__container flex flex-col pb-20 pt-10 px-20 text-white  ">
       <div className="display__timer px-20 items-center flex flex-col">
@@ -17,7 +42,7 @@ export default function Pomofocus() {
             Long Break
           </button>
         </div>
-        <div className="time__remaining py-8 text-8xl">25:00</div>
+        <div className="time__remaining py-8 text-8xl">{mode.getTimeStart()}</div>
         <div className="start__button-container mb-8 ">
           <button className="start__button">START</button>
         </div>

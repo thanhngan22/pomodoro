@@ -1,3 +1,5 @@
+import { CUserSetting } from "./CUserSetting";
+
 // interfaces Setting
 export * from "./ISound";
 export * from "./IColor";
@@ -6,6 +8,7 @@ export * from "./ITheme";
 export * from "./ISettings";
 export * from "./IHourFormat";
 export * from "./IReminder";
+export * from "./CUserSetting";
 
 // interface Blog/Description
 export * from "./IBlog";
@@ -16,6 +19,10 @@ export * from "./CBaseItem";
 export * from "./IPrivacy";
 export * from "./CPrivacyItems";
 export * from "./CPrivacyItem";
+
+
+// modes
+export * from "./CMode";
 
 
 
