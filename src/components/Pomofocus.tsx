@@ -14,31 +14,30 @@ import { CUserSetting, CMode, IMode } from "../interface";
 
 export default function Pomofocus() {
 
-
-
   const User = new CUserSetting();
-  const [mode, setMode] = useState(new CMode());
-
+  const mode = new CMode();
 
 
   function handleOnclickTypesPomo (modeName: string) {
-    
+    console.log('handleOnclickTypesPomo', modeName)
+  mode.setMode(modeName);    
+  return undefined;
 }
 
 
 
 
   return (
-    <div id="app" className=" pomo__container flex flex-col pb-20 pt-10 px-20 text-white  ">
+    <div  className=" pomo__container flex flex-col pb-20 pt-10 px-20 text-white  ">
       <div className="display__timer px-20 items-center flex flex-col">
         <div className="pomo__break-types pt-4">
-          <button className="pomodoro__main-btn pomo__types-btn -ml-3 ">
+          <button onClick={() => handleOnclickTypesPomo('pomodoro')} className="pomodoro__main-btn pomo__types-btn -ml-3 " >
             Pomodoro
           </button>
-          <button className="Short__Break-btn pomo__types-btn ">
+          <button onClick={() => handleOnclickTypesPomo('short-break')} className="Short__Break-btn pomo__types-btn ">
             Short Break
           </button>
-          <button className="Long__Break-btn pomo__types-btn -mr-3">
+          <button onClick={() => handleOnclickTypesPomo('long-break')} className="Long__Break-btn pomo__types-btn -mr-3">
             Long Break
           </button>
         </div>

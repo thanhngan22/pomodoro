@@ -14,7 +14,7 @@ export class CBaseItem implements IBaseItem {
   // constructor
   constructor(data: any) {
     CBaseItem.instanceCount++;
-    console.log("CBaseItem constructor");
+    // console.log("CBaseItem constructor");
 
     this.id = CBaseItem.instanceCount;
     this.subTittle = data.subTittle;

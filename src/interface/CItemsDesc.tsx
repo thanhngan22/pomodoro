@@ -7,7 +7,7 @@ export class CItemsDesc {
   
     // constructor
     constructor(data : IBaseItem[] ) {
-      console.log("CItemDesc constructor");
+      // console.log("CItemDesc constructor");
       this.list = data.map((item) => {
         return new CBaseItem(item);
       })
@@ -17,7 +17,7 @@ export class CItemsDesc {
   
       // methods
       getJSX() {
-        console.log("list before map: ", this.list);
+        // console.log("list before map: ", this.list);
         const listItems = this.list?.map((item) => {
             switch (item.content_type) {
                 case "paragraph":
