@@ -1,0 +1,50 @@
+{
+    "alarm": [
+        {
+            "name": "none",
+            "path": ""
+        },
+        {
+            "name": "Kittchen",
+            "path": ""
+        },
+        {
+            "name": "Bell",
+            "path": ""
+        },
+        {
+            "name": "Bird",
+            "path": ""
+        },
+        {
+            "name": "Digital",
+            "path": ""
+        },
+        {
+            "name": "Wood",
+            "path": ""
+        }
+    ],
+    "ticking": [
+        {
+            "name"  : "none",
+            "path"  : ""
+        }, 
+        {
+            "name": "Ticking Fast",
+            "path": ""
+        },
+        {
+            "name": "Ticking Slow",
+            "path": ""
+        },
+        {
+            "name": "White Noise",
+            "path": ""
+        },
+        {
+            "name": "Brown Noise",
+            "path": ""
+        }
+    ] 
+}
