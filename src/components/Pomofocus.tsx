@@ -9,6 +9,9 @@ import threeDotsBlackIcon from "../assets/icons/3dots.black.png";
 // interfaces and classes
 import { CUserSetting, CMode, IMode } from "../interface";
 
+// components
+import BoxUpdateTask from "./modules/boxUpdareTask";
+
 export default function Pomofocus() {
   let timeStart = "25:00";
 
@@ -80,8 +83,12 @@ export default function Pomofocus() {
         </button>
       </div>
       <div className="tasks__list my-5">
+      <BoxUpdateTask  />
+
         <div className="task__item flex justify-between">
+          <button className="checkIcon__wrapper">
           <div className="checkIcon__container"></div>
+          </button>
           <div className="task__content"></div>
           <div className="task__config">
             <span className="task__count"></span>
@@ -93,7 +100,9 @@ export default function Pomofocus() {
               />
             </button>
           </div>
+
         </div>
+
       </div>
       <div className="add__task  ">
         <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80">

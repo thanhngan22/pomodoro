@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 export default function Nav() {
     return (
         <div className="nav__container h-14  flex text-white justify-between items-center ">
-            <Link to="/app" className="nav__logo flex">
+            <Link to="/" className="nav__logo flex">
                 <img src={checkIcon} alt="check" className="w-5 h-5 mr-1 mt-1" />
                 <h1 className="text-xl font-bold">Pomofocus</h1>
             </Link>
