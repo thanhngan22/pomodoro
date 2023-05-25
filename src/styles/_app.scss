@@ -2,6 +2,8 @@
 /* main app*/
 
 .pomo__container {
+  min-height: 100vh;
+    
     .display__timer {
       background-color: rgba(255, 255, 255, 0.1);
       border-radius: 6px;

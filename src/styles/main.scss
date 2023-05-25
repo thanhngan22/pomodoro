@@ -12,6 +12,7 @@ body {
 
 .main__app {
   background-color: rgb(186, 73, 73);
+  transition: background-color 1s ease-in-out;
 }
 
 /* navbar */

@@ -8,8 +8,8 @@ import Footer from "./Footer";
 export default function Home() {
   return (
     <div id="home__page" className="container w-full h-full ">
-      <div className="main__app w-screen h-screen flex justify-center ">
-        <ul className="main__app-container h-full    ">
+      <div className="main__app w-screen h-full flex justify-center pb-12 ">
+        <ul className="main__app-container h-full  ">
           <Nav />
           <Pomofocus />
         </ul>

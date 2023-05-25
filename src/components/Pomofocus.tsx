@@ -1,5 +1,5 @@
 // hooks
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
 // svg and icons
 import threeDotsIcon from "../assets/icons/3dots.png";
@@ -9,39 +9,45 @@ import threeDotsBlackIcon from "../assets/icons/3dots.black.png";
 // interfaces and classes
 import { CUserSetting, CMode, IMode } from "../interface";
 
-
-
-
 export default function Pomofocus() {
+  let timeStart = "25:00";
 
   const User = new CUserSetting();
   const mode = new CMode();
 
+  useEffect(() => {
+    mode.setMode("pomodoro");
+  }, [])
 
-  function handleOnclickTypesPomo (modeName: string) {
-    console.log('handleOnclickTypesPomo', modeName)
-  mode.setMode(modeName);    
-  return undefined;
-}
-
-
-
+  function handleOnclickTypesPomo(modeName: string) {
+    mode.setMode(modeName);
+    return undefined;
+  }
 
   return (
-    <div  className=" pomo__container flex flex-col pb-20 pt-10 px-20 text-white  ">
+    <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
       <div className="display__timer px-20 items-center flex flex-col">
         <div className="pomo__break-types pt-4">
-          <button onClick={() => handleOnclickTypesPomo('pomodoro')} className="pomodoro__main-btn pomo__types-btn -ml-3 " >
+          <button
+            onClick={() => handleOnclickTypesPomo("pomodoro")}
+            className="pomodoro__main-btn pomo__types-btn -ml-3 "
+          >
             Pomodoro
           </button>
-          <button onClick={() => handleOnclickTypesPomo('short-break')} className="Short__Break-btn pomo__types-btn ">
+          <button
+            onClick={() => handleOnclickTypesPomo("short-break")}
+            className="Short__Break-btn pomo__types-btn "
+          >
             Short Break
           </button>
-          <button onClick={() => handleOnclickTypesPomo('long-break')} className="Long__Break-btn pomo__types-btn -mr-3">
+          <button
+            onClick={() => handleOnclickTypesPomo("long-break")}
+            className="Long__Break-btn pomo__types-btn -mr-3"
+          >
             Long Break
           </button>
         </div>
-        <div className="time__remaining py-8 text-8xl">{mode.getTimeStart()}</div>
+        <div className="time__remaining py-8 text-8xl">{timeStart}</div>
         <div className="start__button-container mb-8 ">
           <button className="start__button">START</button>
         </div>
@@ -58,9 +64,7 @@ export default function Pomofocus() {
       </div>
       <div className="tasks__list my-5">
         <div className="task__item flex justify-between">
-          <div className="checkIcon__container">
-           
-          </div>
+          <div className="checkIcon__container"></div>
           <div className="task__content"></div>
           <div className="task__config">
             <span className="task__count"></span>
