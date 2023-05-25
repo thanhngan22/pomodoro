@@ -4,7 +4,7 @@ import threeDotsBlackIcon from "../assets/icons/3dots.black.png";
 
 export default function Pomofocus() {
   return (
-    <div className="pomo__container flex flex-col pb-20 pt-10 px-20 text-white  ">
+    <div id="app" className=" pomo__container flex flex-col pb-20 pt-10 px-20 text-white  ">
       <div className="display__timer px-20 items-center flex flex-col">
         <div className="pomo__break-types pt-4">
           <button className="pomodoro__main-btn pomo__types-btn -ml-3 ">

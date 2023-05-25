@@ -1,7 +1,6 @@
-import { IColor } from "./IColor";
-import { IHourFormat } from "./IHourFormat";
+import { IColor, IHourFormat } from ".";
 
-export default interface ITheme {
+export interface ITheme {
     // attributes
     color : IColor;
     hourFormat: IHourFormat;
