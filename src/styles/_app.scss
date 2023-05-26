@@ -1,174 +1,162 @@
-
 /* main app*/
 
 .pomo__container {
   min-height: 100vh;
-    
-    .display__timer {
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
 
-      .__active {
-        background-color: rgba(0, 0, 0, 0.2);
+  .display__timer {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
 
-      }
-  
-      .pomo__types-btn {
-        border-radius: 4px;
-        padding: 2px 10px;
-        font-size: 14px;
-        margin: auto;
-      }
-  
-      .start__button {
-        background-color: white;
-        color: rgb(186, 73, 73);
-        padding: 8px 48px;
-        font-size: x-large;
-        box-shadow: 4px;
-        border-radius: 4px;
-      }
+    .__active {
+      background-color: rgba(0, 0, 0, 0.2);
     }
-  
-    .tasks__menu {
-      .tasks__menu-action {
-        background-color: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
-        padding: 8px 8px;
-      }
+
+    .pomo__types-btn {
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 14px;
+      margin: auto;
     }
-  
-    .add__task-btn {
-      background-color: rgba(0, 0, 0, 0.1);
-      border-radius: 6px;
-      border-style: dashed;
-      border-color: rgba(255, 255, 255, 0.3);
-      border-width: 2px;
-    }
-  
-    .tasks__list {
-      /* box update task */
-      .wrapper__box-update-task {
-        display: none;
-        transform-style: preserve-3d;
-        animation-duration: 0.3s;
-        animation-fill-mode: forwards;
-        animation-name: flip-out-x;
 
-        border-radius: 8px;
-        padding-top: 20px;
-        min-height: 240px;
-        margin: 10px 0;
-        
-        .update__text {
-          min-height: 60px;
-          padding: 10px 20px;
-
-          &:focus {
-            outline: none;
-            caret-color: gray;
-          }
-
-          &::placeholder {
-            font-style: italic;
-            color: rgba(0, 0, 0, 0.3);
-            font-weight: 600;
-            font-size: 18px;
-          }
-
-        }
-
-        .update__act {
-          height: 120px;
-          padding: 0 20px;
-
-          > h3 {
-            font-weight: 500;
-            opacity: 0.8;
-          }
-
-          .update__act--wrapper {
-            .update__act--input {
-              background-color: #efefef;
-              max-width: 72px;
-              border-radius: 5px;
-              padding: 8px 10px;
-              color: rgba(0, 0, 0, 0.8);
-              opacity: 0.8;
-              font-weight: 600;
-              text-align: center;
-
-              &:focus {
-                outline: none;
-                caret-color: gray;
-              }
-            }
-
-            .update__increase, .update__decrease {
-              background-color: white;
-              border-radius: 4px;
-              width: 40px;
-              height: 34px;
-              border: 1px solid rgb(223, 223, 223);
-              box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
-
-      
-            }
-          }
-
-
-        }
-
-        .update__footer {
-          background-color: #efefef;
-          border-radius: 0 0 8px 8px;
-        }
-
-
-      }
-
-      .task__item {
-        background-color: white;
-        border-radius: 5px;
-        width: full;
-        padding: 16px 16px;
-  
-        .checkIcon__container {
-          position: relative;
-          width: 28px;
-          height: 28px;
-          background-color: rgba(0, 0, 0, 0.1);
-          border-radius: 50%;
-  
-          &::after {
-            content: "";
-            position: absolute;
-            width: 11px;
-            height: 16px;
-            margin-left: -5px;
-            margin-top: 4px;
-            border-color: white;
-  
-            border-width: 0 3px 3px 0;
-            transform: rotate(45deg);
-          }
-        }
-  
-        .task__config {
-          .task__config-icon {
-          }
-        }
-      }
-    }
-  
-    .more__inf {
-      border-top: 0.5px solid rgba(255, 255, 255, 0.9);
-      margin: 20px 0;
-      background-color: rgba(255, 255, 255, 0.15);
-      padding: 20px;
+    .start__button {
+      background-color: white;
+      color: rgb(186, 73, 73);
+      padding: 8px 48px;
+      font-size: x-large;
+      box-shadow: 4px;
+      border-radius: 4px;
     }
   }
-  
 
-  
-  
+  .tasks__menu {
+    .tasks__menu-action {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 8px 8px;
+    }
+  }
+
+  .add__task-btn {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.3);
+    border-width: 2px;
+  }
+
+  .tasks__list {
+    /* box update task */
+    .wrapper__box-update-task {
+      display: none;
+      transform-style: preserve-3d;
+      animation-duration: 0.3s;
+      animation-fill-mode: forwards;
+      animation-name: flip-out-x;
+
+      border-radius: 8px;
+      padding-top: 20px;
+      min-height: 240px;
+      margin: 10px 0;
+
+      .update__text {
+        min-height: 60px;
+        padding: 10px 20px;
+
+        &:focus {
+          outline: none;
+          caret-color: gray;
+        }
+
+        &::placeholder {
+          font-style: italic;
+          color: rgba(0, 0, 0, 0.3);
+          font-weight: 600;
+          font-size: 18px;
+        }
+      }
+
+      .update__act {
+        height: 120px;
+        padding: 0 20px;
+
+        > h3 {
+          font-weight: 500;
+          opacity: 0.8;
+        }
+
+        .update__act--wrapper {
+          .update__act--input {
+            background-color: #efefef;
+            max-width: 72px;
+            border-radius: 5px;
+            padding: 8px 10px;
+            color: rgba(0, 0, 0, 0.8);
+            opacity: 0.8;
+            font-weight: 600;
+            text-align: center;
+
+            &:focus {
+              outline: none;
+              caret-color: gray;
+            }
+          }
+
+          .update__increase,
+          .update__decrease {
+            background-color: white;
+            border-radius: 4px;
+            width: 40px;
+            height: 34px;
+            border: 1px solid rgb(223, 223, 223);
+            box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
+          }
+        }
+      }
+
+      .update__footer {
+        background-color: #efefef;
+        border-radius: 0 0 8px 8px;
+      }
+    }
+
+    .task__item {
+      background-color: white;
+      border-radius: 5px;
+      width: full;
+      padding: 16px 16px;
+
+      .checkIcon__container {
+        position: relative;
+        width: 28px;
+        height: 28px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 11px;
+          height: 16px;
+          margin-left: -5px;
+          margin-top: 4px;
+          border-color: white;
+
+          border-width: 0 3px 3px 0;
+          transform: rotate(45deg);
+        }
+      }
+
+      .task__config {
+        .task__config-icon {
+        }
+      }
+    }
+  }
+
+  .more__inf {
+    border-top: 0.5px solid rgba(255, 255, 255, 0.9);
+    margin: 20px 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 20px;
+  }
+}
