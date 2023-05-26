@@ -1,4 +1,4 @@
-import { ITimer, ISound, ITheme, IReminder, ISoundProps } from ".";
+import { ITimer, ISound, ITheme, IReminder, ISoundProps, CListTasks } from ".";
 
 export interface ISettings {
   // attributes
@@ -6,6 +6,7 @@ export interface ISettings {
   sound: ISound;
   theme: ITheme;
   notification: IReminder;
+  todolist: CListTasks;
 
   // methods for timer
   // setters

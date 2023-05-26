@@ -4,7 +4,7 @@ export interface ITask {
     numTasksDone: number;
     quantity: number;
     note: string;
-    status: string;
+    status: string;     // "finished", "not finish"
 }
 
 export class CTask implements ITask {
@@ -25,6 +25,8 @@ export class CTask implements ITask {
     }
 
     // methods
+
+
     setName(name: string) {
         this.name = name;
     }
@@ -43,6 +45,11 @@ export class CTask implements ITask {
 
     setNumTasksDone(numTasksDone: number) {
         this.numTasksDone = numTasksDone;
+    }
+
+    // getters
+    getId() {
+        return this.id;   
     }
 
     getName() {
@@ -89,5 +96,23 @@ export class CListTasks {
             task.id = index + 1;
         }
         );
+    }
+
+    update(task: CTask)  {
+        this.list.forEach((item) => {
+            // if exists task : update and return
+            if (item.getId() === task.getId()) {
+                item.setName(task.getName())
+                item.setNumTasksDone(task.getNumTasksDone())
+                item.setNote(task.getNote());
+                item.setQuantity(task.getQuantity())
+                if (item.getQuantity() === item.getNumTasksDone()) {
+                    item.setStatus("finished")
+                }
+                return
+            }
+        })
+        // else: push task
+        this.list.push(task)
     }
 }

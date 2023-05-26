@@ -1,5 +1,6 @@
 // hooks
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+
 
 // svg and icons
 import threeDotsIcon from "../assets/icons/3dots.png";
@@ -7,7 +8,7 @@ import plusIcon from "../assets/icons/plus.png";
 import threeDotsBlackIcon from "../assets/icons/3dots.black.png";
 
 // interfaces and classes
-import { CUserSetting, CMode, IMode } from "../interface";
+import { CUserSetting, CMode, IMode, CTask } from "../interface";
 
 // components
 import BoxUpdateTask from "./modules/boxUpdareTask";
@@ -19,8 +20,11 @@ export default function Pomofocus() {
   // console.log("User setting: ", JSON.stringify(User, null, 2))
   const mode = new CMode();
 
+  const taskItem = new CTask();
+
   useEffect(() => {
     mode.setMode("pomodoro");
+
   }, []);
 
   function handleOnclickTypesPomo(modeName: string) {
@@ -40,7 +44,7 @@ export default function Pomofocus() {
 
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
-      <div className="display__timer px-20 items-center flex flex-col">
+      <div className="display__timer items-center flex flex-col">
         <div className="pomo__break-types pt-4">
           <button
             onClick={() => handleOnclickTypesPomo("pomodoro")}
@@ -61,7 +65,7 @@ export default function Pomofocus() {
             Long Break
           </button>
         </div>
-        <div className="time__remaining py-8 text-8xl">{timeStart}</div>
+        <div className="time__remaining px-20 py-8 text-8xl">{timeStart}</div>
         <div className="start__button-container mb-8 ">
           <button
             onClick={() => changeTextStartBtn()}
@@ -83,7 +87,7 @@ export default function Pomofocus() {
         </button>
       </div>
       <div className="tasks__list my-5">
-      <BoxUpdateTask  />
+      <BoxUpdateTask task={taskItem} user={User}  />
 
         <div className="task__item flex justify-between">
           <button className="checkIcon__wrapper">
