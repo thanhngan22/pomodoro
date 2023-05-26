@@ -8,7 +8,7 @@
   
     .desc__wrap {
       max-width: 640px;
-      padding: 4px;
+      padding: 20px;
   
       .description__tittle {
         max-width: 640px;
@@ -20,7 +20,7 @@
       }
     
       .description__main {
-        max-width: 640px;;
+        max-width: 640px;
   
   
         .desc__item {
@@ -28,6 +28,7 @@
           font-size: 16px;
   
           .desc__item-para {
+
             > a {
               color: hsl(2, 66%, 58%);
               font-weight: 600;

@@ -3,7 +3,7 @@
 #privacy__container {
     .privacy__nav {
       width: 640px;
-      padding: 10px 0;
+      padding: 10px 20px;
       color: #e65b57;
       font-size: 30px;
     }
@@ -14,12 +14,15 @@
       display: flex;
       flex-direction: column;
       margin: auto;
+      padding: 20px;
       max-width: 620px;
       color: #785e60;
 
 
 
         .privacy__item {
+    
+
           > h2 , h3, h4 {
             color: #541c1f;
           }
@@ -46,7 +49,8 @@
           }
 
           .privacy__para {
-              font-size: 18px;
+              font-size: 16px;
+              padding: 10px 8px 4px 10px;
           }
 
           /* items */
@@ -55,10 +59,6 @@
               font-size: 32px;
               font-weight: semi-bold;
               padding: 28px 0;
-            }
-
-            .privacy__para {
-              padding: 10px 0;
             }
             
           }
@@ -70,9 +70,7 @@
               padding: 28px 0 10px 0;
             }
 
-            .privacy__para {
-              padding: 10px 0;
-            }
+
 
             .privacy__subheading {
               font-size: 19px;
@@ -88,9 +86,7 @@
 
             > div li {
               padding-left: 32px;
-            }
 
-            > div li {
               padding-top: 6px;
               padding-bottom: 6px;
             }
@@ -99,10 +95,10 @@
 
           .Use_Of_Data {
             > h2 {
-              padding: 30px 0;
+              padding: 20px 0;
             }
             > ul li {
-              padding : 6px 16px;
+              padding : 6px 16px 6px 24px;
             }
             
           }
@@ -119,7 +115,7 @@
             }
 
             > ul li {
-              padding : 6px 16px;
+              padding : 6px 16px 6px 24px;
             }
             
             
@@ -128,17 +124,14 @@
 
           .Transfer_Of_Data, .Changes_To_This_Privacy_Policy, .Service_Providers, .Security_Of_Data, .Contact_Us {
             .privacy__heading {
-              padding: 30px 0 20px 0;
-            }
-            > p {
-              padding: 10px 0;
+              padding: 20px 0 20px 0;
             }
 
           }
             
           .Contact_Us {
             > a {
-              padding-left: 20px;
+              padding-left: 28px;
             }
             padding-bottom: 40px;
               
