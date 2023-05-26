@@ -5,13 +5,13 @@ import { useState, useEffect, useRef } from "react";
 // svg and icons
 import threeDotsIcon from "../assets/icons/3dots.png";
 import plusIcon from "../assets/icons/plus.png";
-import threeDotsBlackIcon from "../assets/icons/3dots.black.png";
+
 
 // interfaces and classes
 import { CUserSetting, CMode, IMode, CTask } from "../interface";
 
 // components
-import BoxUpdateTask from "./modules/boxUpdareTask";
+import BoxTaskMini from "./modules/boxTaskMini";
 
 export default function Pomofocus() {
   let timeStart = "25:00";
@@ -87,26 +87,7 @@ export default function Pomofocus() {
         </button>
       </div>
       <div className="tasks__list my-5">
-      <BoxUpdateTask task={taskItem} user={User}  />
-
-        <div className="task__item flex justify-between">
-          <button className="checkIcon__wrapper">
-          <div className="checkIcon__container"></div>
-          </button>
-          <div className="task__content"></div>
-          <div className="task__config">
-            <span className="task__count"></span>
-            <button className="border rounded px-1.5 py-1.5   ">
-              <img
-                src={threeDotsBlackIcon}
-                alt="thee-dots-black-icon"
-                className="w-4 h-4 opacity-40 task__config-icon"
-              />
-            </button>
-          </div>
-
-        </div>
-
+        <BoxTaskMini task={taskItem} user={User} />
       </div>
       <div className="add__task  ">
         <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80">

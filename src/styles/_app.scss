@@ -49,7 +49,7 @@
     .tasks__list {
       /* box update task */
       .wrapper__box-update-task {
-        display: block;
+        display: none;
         transform-style: preserve-3d;
         animation-duration: 0.3s;
         animation-fill-mode: forwards;
@@ -131,7 +131,7 @@
         background-color: white;
         border-radius: 5px;
         width: full;
-        padding: 18px 16px;
+        padding: 16px 16px;
   
         .checkIcon__container {
           position: relative;
