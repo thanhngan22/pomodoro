@@ -11,7 +11,7 @@ interface IProp {
 }
 
 const BoxUpdateTask: React.FC<IProp> = ({ task, user }) => {
-  const [nameTask, setNameTask] = useState<string>(task.getName());
+  const [nameTask, setNameTask] = useState<string>(task?.getName());
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNameTask(e.target.value);
@@ -22,7 +22,7 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user }) => {
     console.log("task: ", JSON.stringify(task, null, 2));
     switch (method) {
       case "delete":
-        user.todolist.delete(task.getId() || -1);
+        user.todolist.delete(task?.getId() || -1);
         break;
       case "update":
         user.todolist.update(task);

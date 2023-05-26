@@ -1,22 +1,20 @@
 // hooks
 import { useState, useEffect, useRef } from "react";
 
-
 // svg and icons
 import threeDotsIcon from "../assets/icons/3dots.png";
 import plusIcon from "../assets/icons/plus.png";
-
 
 // interfaces and classes
 import { CUserSetting, CMode, IMode, CTask } from "../interface";
 
 // components
-import BoxTaskMini from "./modules/boxTaskMini";
+import ShowListTasks from "./modules/showListTasks";
+import BoxUpdateTask from "./modules/boxUpdareTask";
 
 export default function Pomofocus() {
   let timeStart = "25:00";
-
-  const User = new CUserSetting();
+  const [User, setUser] = useState<CUserSetting>(new CUserSetting());
   // console.log("User setting: ", JSON.stringify(User, null, 2))
   const mode = new CMode();
 
@@ -24,7 +22,6 @@ export default function Pomofocus() {
 
   useEffect(() => {
     mode.setMode("pomodoro");
-
   }, []);
 
   function handleOnclickTypesPomo(modeName: string) {
@@ -41,6 +38,18 @@ export default function Pomofocus() {
       startBtn.innerHTML = "START";
     }
   }
+
+  // handle event click button add task
+  function handleOnClickAddTask () {
+    const addTaskBox = document.querySelector(".add__task-box");
+    if (!addTaskBox) return;
+    addTaskBox.classList.remove("hidden");
+
+    const addTaskBtn = document.querySelector(".add__task-btn");
+    if (!addTaskBtn) return;
+    addTaskBtn.classList.add("hidden");
+  }
+
 
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
@@ -87,10 +96,15 @@ export default function Pomofocus() {
         </button>
       </div>
       <div className="tasks__list my-5">
-        <BoxTaskMini task={taskItem} user={User} />
+        <ShowListTasks user={User} />
       </div>
       <div className="add__task  ">
-        <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80">
+      <div className="add__task-box hidden">
+          <BoxUpdateTask task={taskItem} user={User} />
+        </div>
+        <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80"
+        onClick={() => handleOnClickAddTask()}
+        >
           <img
             src={plusIcon}
             alt="plus-icon"
@@ -98,6 +112,7 @@ export default function Pomofocus() {
           />
           <span className="self-center">Add Task</span>
         </button>
+     
       </div>
       <div className="more__inf text-center">
         Pomos: <span></span>

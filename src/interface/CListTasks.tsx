@@ -5,6 +5,7 @@ export interface ITask {
     quantity: number;
     note: string;
     status: string;     // "finished", "not finish"
+    pos?: number;   // position in list
 }
 
 export class CTask implements ITask {
@@ -116,8 +117,4 @@ export class CListTasks {
         this.list.push(task)
     }
 
-    // show list tasks
-    show() {
-
-    }
 }
