@@ -31,8 +31,11 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user }) => {
           </div>
         </div>
         <div className="task__note bg-yellow-100 py-3 ml-5 mt-3 hidden "></div>
-      </div>
+      </div >
+      <div className="hidden">
       <BoxUpdateTask task={task} user={user} />
+
+      </div>
     </div>
   );
 };

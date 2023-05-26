@@ -11,21 +11,39 @@ interface IProp {
 }
 
 const BoxUpdateTask: React.FC<IProp> = ({ task, user }) => {
-  const [nameTask, setNameTask] = useState<string>(task?.getName());
+  const [nameTask, setNameTask] = useState<string>(task.getName());
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNameTask(e.target.value);
   }
 
   function handleOnClickBtn(method : string) {
+    console.log("method onclick : ", method);
+
     task.setName(nameTask);
     console.log("task: ", JSON.stringify(task, null, 2));
     switch (method) {
       case "delete":
-        user.todolist.delete(task?.getId() || -1);
+        console.log("delete task");
+        user.todolist.delete(task.getId() || -1);
         break;
       case "update":
+        console.log("update task");
+        console.log("current list task: ", JSON.stringify(user.todolist.list, null, 2))
+
         user.todolist.update(task);
+
+        // case add task 
+        const addTaskBox = document.querySelector('.add__task-box');
+        const addTaskBtn = document.querySelector('.add__task-btn');
+        if (!addTaskBox || !addTaskBtn) return;
+        // show addTaskBtn and hide box update task when click save button
+        if (addTaskBtn.classList.contains('hidden')) {
+          addTaskBtn.classList.remove('hidden');
+          addTaskBox.classList.add('hidden');
+        }
+
+
         break;
       default:
         break;

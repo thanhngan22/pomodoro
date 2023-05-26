@@ -28,48 +28,48 @@ export class CTask implements ITask {
     // methods
 
 
-    setName(name: string) {
+    setName(name: string) : void {
         this.name = name;
     }
 
-    setQuantity(quantity: number) {
+    setQuantity(quantity: number) : void {
         this.quantity = quantity;
     }
 
-    setNote (note: string) {
+    setNote (note: string) :void {
         this.note = note;
     }
 
-    setStatus(status: string) {
+    setStatus(status: string) :void {
         this.status = status;
     }
 
-    setNumTasksDone(numTasksDone: number) {
+    setNumTasksDone(numTasksDone: number) :void {
         this.numTasksDone = numTasksDone;
     }
 
     // getters
-    getId() {
-        return this.id;   
+    getId() : number {
+        return this.id || 0;  
     }
 
-    getName() {
+    getName() : string {
         return this.name;
     }
 
-    getQuantity() {
+    getQuantity() : number {
         return this.quantity;
     }
 
-    getNote() {
+    getNote() : string {
         return this.note;
     }
 
-    getStatus() {
+    getStatus() : string {
         return this.status;
     }
 
-    getNumTasksDone() {
+    getNumTasksDone() : number {
         return this.numTasksDone;
     }
 
@@ -85,12 +85,18 @@ export class CListTasks {
     }
 
     // methods
-    push(task : CTask) {
+    push(task : CTask) : void {
+        console.log("method: push new task");
+        console.log("current length: ", this.list.length);
+        console.log("current id of new task: ", task.id)
+
         task.id = this.list.length + 1;
         this.list.push(task);
     }
 
-    delete(id: number) {
+    delete(id: number) :void {
+        console.log("method: delete task");
+
         this.list = this.list.filter((task) => task.id !== id);
         // update id
         this.list.forEach((task, index) => {
@@ -99,7 +105,9 @@ export class CListTasks {
         );
     }
 
-    update(task: CTask)  {
+    update(task: CTask) : void {
+        console.log("method: update task");
+
         this.list.forEach((item) => {
             // if exists task : update and return
             if (item.getId() === task.getId()) {
@@ -115,6 +123,10 @@ export class CListTasks {
         })
         // else: push task
         this.list.push(task)
+    }
+
+    getList() : CTask[] {
+        return this.list;
     }
 
 }

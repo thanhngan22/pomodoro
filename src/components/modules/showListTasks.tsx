@@ -13,7 +13,8 @@ const ShowListTasks : React.FC<IProp> = ({user}) => {
         // class name for each task: box-task__item--{id}
         const _classNameCommon = "box-task__item";
         const _classNameUnique = `${_classNameCommon}--${task.id}`;
-        const _className = `${_classNameCommon} ${_classNameUnique}`;
+        const _css = 'py-1'
+        const _className = `${_classNameCommon} ${_classNameUnique} ${_css}`
         jsx.push (
             <li key={index} className={_className}>
                 <BoxTaskMini task={task} user = {user} />

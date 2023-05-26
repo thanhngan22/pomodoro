@@ -6,7 +6,7 @@ export class CUserSetting implements ISettings {
   sound: ISound;
   theme: ITheme;
   notification: IReminder;
-  todolist : CListTasks
+  todolist : CListTasks;
 
   // default constructor
   constructor() {
