@@ -49,7 +49,11 @@
     .tasks__list {
       /* box update task */
       .wrapper__box-update-task {
-        animation: 0.1s ease-in-out 0s 1 normal none running expand;
+        display: block;
+        transform-style: preserve-3d;
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
+        animation-name: flip-out-x;
 
         border-radius: 8px;
         padding-top: 20px;
