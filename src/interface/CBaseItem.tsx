@@ -87,7 +87,7 @@ export class CBaseItem implements IBaseItem {
     return (
       <div className="desc__item" key={this.id}>
         <h2 className="desc__item-subTittle">{this.subTittle}</h2>
-        <p className="desc__item-listNum">{listItems}</p>
+        <div className="desc__item-listNum">{listItems}</div>
       </div>
     );
   }

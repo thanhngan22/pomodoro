@@ -6,7 +6,7 @@ import threeDotsIcon from "../assets/icons/3dots.png";
 import plusIcon from "../assets/icons/plus.png";
 
 // interfaces and classes
-import { CUserSetting, CMode, CTask } from "../interface";
+import { CUserSetting, CTask } from "../interface";
 
 // components
 import ShowListTasks from "./modules/showListTasks";
@@ -24,13 +24,16 @@ const Pomofocus: React.FC = () => {
   const [User, setUser] = useState<CUserSetting>(userData);
   // console.log("User setting: ", JSON.stringify(User, null, 2))
 
-  User.mode.setMode(User.mode.getMode());
-
-
   function handleOnChangeUser(newUser: CUserSetting) {
     console.log("handle on change user ...")
     setUser(newUser);
   }
+
+  useEffect(() => {
+    // set mode after first render
+  User.mode.setMode(User.mode.getMode());
+
+  }, [])
 
   useEffect(() => {
     console.log("render cause user change ...");
