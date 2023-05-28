@@ -1,6 +1,6 @@
 import { CTask, CUserSetting } from "../../interface";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import UpIcon from "../../assets/icons/caret-up.png";
 import DownIcon from "../../assets/icons/caret-down.png";
@@ -8,46 +8,64 @@ import DownIcon from "../../assets/icons/caret-down.png";
 interface IProp {
   task: CTask;
   user: CUserSetting;
+  onUserChange?: (newUser: CUserSetting) => void;
 }
 
-const BoxUpdateTask: React.FC<IProp> = ({ task, user }) => {
+const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
   const [nameTask, setNameTask] = useState<string>(task.getName());
+  const cloneUser = new CUserSetting(user);
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
     setNameTask(e.target.value);
   }
 
-  function handleOnClickBtn(method : string) {
+  function handleOnClickBtn(method: string) {
     console.log("method onclick : ", method);
+    const addTaskBox = document.querySelector(".add__task-box");
+    const addTaskBtn = document.querySelector(".add__task-btn");
+    if (!addTaskBox || !addTaskBtn) return;
 
-    task.setName(nameTask);
-    console.log("task: ", JSON.stringify(task, null, 2));
     switch (method) {
+      case "cancel":
+        console.log("cancel task");
+        return;
+
       case "delete":
         console.log("delete task");
-        user.todolist.delete(task.getId() || -1);
+        cloneUser.todolist.delete(task.getId() || -1);
         break;
+
       case "update":
         console.log("update task");
-        console.log("current list task: ", JSON.stringify(user.todolist.list, null, 2))
+        console.log(
+          "current list task: ",
+          JSON.stringify(cloneUser.todolist.list, null, 2)
+        );
 
-        user.todolist.update(task);
-
-        // case add task 
-        const addTaskBox = document.querySelector('.add__task-box');
-        const addTaskBtn = document.querySelector('.add__task-btn');
-        if (!addTaskBox || !addTaskBtn) return;
-        // show addTaskBtn and hide box update task when click save button
-        if (addTaskBtn.classList.contains('hidden')) {
-          addTaskBtn.classList.remove('hidden');
-          addTaskBox.classList.add('hidden');
+        // case add task
+        if (addTaskBtn.classList.contains("hidden")) {
+          // add new task
+          console.log("create and add new task");
+          const temp = new CTask();
+          temp.setName(nameTask);
+          cloneUser.todolist.push(temp);
+        } else {
+          // update task
+          task.setName(nameTask);
+          cloneUser.todolist.update(task);
         }
-
-
         break;
+
       default:
         break;
     }
+
+    // show addTaskBtn and hide box update task when click save button
+    addTaskBox?.classList.add("hidden");
+    if (addTaskBtn?.classList.contains("hidden")) {
+      addTaskBtn?.classList.remove("hidden");
+    }
+    onUserChange && onUserChange(cloneUser);
   }
 
   return (
@@ -98,14 +116,18 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user }) => {
       </div>
       <ul className="update__footer w-full py-3  flex justify-between font-semibold">
         <li>
-          <button className="update__delete px-5 py-1 ml-4 rounded text-gray-400"
-          onClick={() => handleOnClickBtn("delete")}
+          <button
+            className="update__delete px-5 py-1 ml-4 rounded text-gray-400"
+            onClick={() => handleOnClickBtn("delete")}
           >
             Delete
           </button>
         </li>
         <li className="">
-          <button className="update__cancel px-4 py-1 rounded text-gray-400">
+          <button
+            className="update__cancel px-4 py-1 rounded text-gray-400"
+            onClick={() => handleOnClickBtn("cancel")}
+          >
             Cancel
           </button>
           <button

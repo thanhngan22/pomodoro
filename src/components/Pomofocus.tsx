@@ -10,19 +10,25 @@ import { CUserSetting, CMode, IMode, CTask } from "../interface";
 
 // components
 import ShowListTasks from "./modules/showListTasks";
-import BoxUpdateTask from "./modules/boxUpdareTask";
+import BoxUpdateTask from "./modules/boxUpdateTask";
 
-export default function Pomofocus() {
+const Pomofocus : React.FC = () => {
   let timeStart = "25:00";
   const [User, setUser] = useState<CUserSetting>(new CUserSetting());
   // console.log("User setting: ", JSON.stringify(User, null, 2))
   const mode = new CMode();
 
-  const taskItem = new CTask();
-
   useEffect(() => {
     mode.setMode("pomodoro");
   }, []);
+
+    function handleOnChangeUser(newUser : CUserSetting) {
+    setUser(newUser);
+  }
+
+  useEffect(() => {
+    console.log("render cause user change ...")
+  }, [User])
 
   function handleOnclickTypesPomo(modeName: string) {
     mode.setMode(modeName);
@@ -37,7 +43,7 @@ export default function Pomofocus() {
     } else {
       startBtn.innerHTML = "START";
     }
-  }
+  } 
 
   // handle event click button add task
   function handleOnClickAddTask () {
@@ -48,6 +54,11 @@ export default function Pomofocus() {
     const addTaskBtn = document.querySelector(".add__task-btn");
     if (!addTaskBtn) return;
     addTaskBtn.classList.add("hidden");
+
+    // focus input when show box 
+    const inputElement = document.querySelector(".update__text") as HTMLInputElement;
+    if (!inputElement) return;
+    inputElement.focus();
   }
 
 
@@ -100,7 +111,7 @@ export default function Pomofocus() {
       </div>
       <div className="add__task  ">
       <div className="add__task-box hidden">
-          <BoxUpdateTask task={taskItem} user={User} />
+          <BoxUpdateTask task={new CTask()} user={User} onUserChange={handleOnChangeUser}/>
         </div>
         <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80"
         onClick={() => handleOnClickAddTask()}
@@ -121,3 +132,5 @@ export default function Pomofocus() {
     </div>
   );
 }
+
+export default Pomofocus;

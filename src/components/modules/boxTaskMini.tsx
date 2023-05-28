@@ -1,5 +1,5 @@
 import threeDotsBlackIcon from "../../assets/icons/3dots.black.png";
-import BoxUpdateTask from "./boxUpdareTask";
+import BoxUpdateTask from "./boxUpdateTask";
 import { CTask, CUserSetting } from "../../interface";
 
 interface IProp {

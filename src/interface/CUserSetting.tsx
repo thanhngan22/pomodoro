@@ -9,7 +9,16 @@ export class CUserSetting implements ISettings {
   todolist : CListTasks;
 
   // default constructor
-  constructor() {
+  constructor(other? : CUserSetting) {
+    if (other) {
+      this.timer = other.timer;
+      this.sound = other.sound;
+      this.theme = other.theme;
+      this.notification = other.notification;
+      this.todolist = other.todolist;
+      return;
+    }
+
     this.timer = {
       timePomo: 25,
       timeShortBreak: 5,

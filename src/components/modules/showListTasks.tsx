@@ -6,6 +6,7 @@ interface IProp {
 }
 
 const ShowListTasks : React.FC<IProp> = ({user}) => {
+    console.log("render show list tasks ...")
 
     let jsx : JSX.Element[] = [];
     user.todolist.list.forEach((task, index) => {
