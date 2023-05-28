@@ -13,6 +13,7 @@ interface IProp {
 
 const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
   const [nameTask, setNameTask] = useState<string>(task.getName() || "");
+  // console.log("user passed to box update task: ", user);
   const cloneUser = new CUserSetting(user);
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -28,7 +29,7 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
     switch (method) {
       case "cancel":
         console.log("cancel task");
-        return;
+        break;
 
       case "delete":
         console.log("delete task");
@@ -37,15 +38,11 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
 
       case "update":
         console.log("update task");
-        console.log(
-          "current list task: ",
-          JSON.stringify(cloneUser.todolist.list, null, 2)
-        );
 
         // case add task
         if (addTaskBtn.classList.contains("hidden")) {
           // add new task
-          console.log("create and add new task");
+          // console.log("create and add new task");
           const temp = new CTask();
           temp.setName(nameTask);
           cloneUser.todolist.push(temp);

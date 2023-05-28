@@ -30,6 +30,15 @@ export class CTask implements ITask {
 
     // methods
 
+    copyFrom(other: CTask) : void {
+        this.id = other.id;
+        this.name = other.name;
+        this.numTasksDone = other.numTasksDone;
+        this.quantity = other.quantity;
+        this.note = other.note;
+        this.status = other.status;
+    }
+
 
     setName(name: string) : void {
         this.name = name;
@@ -83,7 +92,16 @@ export class CListTasks {
     list: CTask[];
 
     // constructor
-    constructor() {
+    constructor(other? : CListTasks) {
+        if (other) {
+            this.list = new Array<CTask>();
+            other.list.forEach((item) => {
+                let task = new CTask();
+                task.copyFrom(item);
+                this.list.push(task);
+            });
+            return;
+        }
         this.list = [];
     }
 

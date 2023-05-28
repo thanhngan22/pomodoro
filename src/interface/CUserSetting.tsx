@@ -15,7 +15,7 @@ export class CUserSetting implements ISettings {
       this.sound = other.sound;
       this.theme = other.theme;
       this.notification = other.notification;
-      this.todolist = other.todolist;
+      this.todolist = new CListTasks(other.todolist);
       return;
     }
 

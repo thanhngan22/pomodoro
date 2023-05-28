@@ -6,29 +6,38 @@ import threeDotsIcon from "../assets/icons/3dots.png";
 import plusIcon from "../assets/icons/plus.png";
 
 // interfaces and classes
-import { CUserSetting, CMode, IMode, CTask } from "../interface";
+import { CUserSetting, CMode, CTask } from "../interface";
 
 // components
 import ShowListTasks from "./modules/showListTasks";
 import BoxUpdateTask from "./modules/boxUpdateTask";
 
-const Pomofocus : React.FC = () => {
+const mode = new CMode();
+mode.setMode("pomodoro");
+
+// get data from local storage
+const data = localStorage.getItem("userData");
+console.log("data from local storage: ", data);
+
+let userData : CUserSetting = data ? new CUserSetting(JSON.parse(data)) : new CUserSetting();
+
+
+const Pomofocus: React.FC = () => {
   let timeStart = "25:00";
-  const [User, setUser] = useState<CUserSetting>(new CUserSetting());
+  const [User, setUser] = useState<CUserSetting>(userData);
   // console.log("User setting: ", JSON.stringify(User, null, 2))
-  const mode = new CMode();
 
-  useEffect(() => {
-    mode.setMode("pomodoro");
-  }, []);
-
-    function handleOnChangeUser(newUser : CUserSetting) {
+  function handleOnChangeUser(newUser: CUserSetting) {
+    console.log("handle on change user ...")
     setUser(newUser);
   }
 
   useEffect(() => {
-    console.log("render cause user change ...")
-  }, [User])
+    console.log("render cause user change ...");
+
+    // write to local storage
+    localStorage.setItem("userData", JSON.stringify(User, null, 2));
+  }, [User]);
 
   function handleOnclickTypesPomo(modeName: string) {
     mode.setMode(modeName);
@@ -43,24 +52,25 @@ const Pomofocus : React.FC = () => {
     } else {
       startBtn.innerHTML = "START";
     }
-  } 
+  }
 
   // handle event click button add task
-  function handleOnClickAddTask () {
+  function handleOnClickAddTask() {
     const addTaskBox = document.querySelector(".add__task-box");
     if (!addTaskBox) return;
-    addTaskBox.classList.remove("hidden");
 
+    addTaskBox.classList.remove("hidden");
     const addTaskBtn = document.querySelector(".add__task-btn");
     if (!addTaskBtn) return;
     addTaskBtn.classList.add("hidden");
 
-    // focus input when show box 
-    const inputElement = addTaskBox.querySelector(".update__text") as HTMLInputElement;
+    // focus input when show box
+    const inputElement = addTaskBox.querySelector(
+      ".update__text"
+    ) as HTMLInputElement;
     if (!inputElement) return;
     inputElement.focus();
   }
-
 
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
@@ -110,11 +120,16 @@ const Pomofocus : React.FC = () => {
         <ShowListTasks user={User} />
       </div>
       <div className="add__task  ">
-      <div className="add__task-box hidden">
-          <BoxUpdateTask task={new CTask()} user={User} onUserChange={handleOnChangeUser} />
+        <div className="add__task-box hidden">
+          <BoxUpdateTask
+            task={new CTask()}
+            user={User}
+            onUserChange={handleOnChangeUser}
+          />
         </div>
-        <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80"
-        onClick={() => handleOnClickAddTask()}
+        <button
+          className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80"
+          onClick={() => handleOnClickAddTask()}
         >
           <img
             src={plusIcon}
@@ -123,7 +138,6 @@ const Pomofocus : React.FC = () => {
           />
           <span className="self-center">Add Task</span>
         </button>
-     
       </div>
       <div className="more__inf text-center">
         Pomos: <span></span>
@@ -131,6 +145,6 @@ const Pomofocus : React.FC = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Pomofocus;
