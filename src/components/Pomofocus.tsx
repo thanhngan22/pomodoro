@@ -36,7 +36,7 @@ const Pomofocus: React.FC = () => {
   }, [])
 
   useEffect(() => {
-    console.log("render cause user change ...");
+    // console.log("render cause user change ...");
 
     // write to local storage
     localStorage.setItem("userData", JSON.stringify(User, null, 2));
