@@ -40,6 +40,7 @@ const Pomofocus: React.FC = () => {
 
     // write to local storage
     localStorage.setItem("userData", JSON.stringify(User, null, 2));
+    console.log("update user data to local storage ...")
   }, [User]);
 
   function handleOnclickTypesPomo(modeName: string) {

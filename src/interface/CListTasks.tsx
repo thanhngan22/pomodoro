@@ -4,7 +4,7 @@ export interface ITask {
     numTasksDone: number;
     quantity: number;
     note: string;
-    status: string;     // "finished", "not finish"
+    status: string;     // "finished", "unfinished"
     pos?: number;   // position in list
 }
 

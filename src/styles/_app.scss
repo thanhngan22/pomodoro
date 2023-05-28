@@ -55,8 +55,8 @@
         position: relative;
         width: 28px;
         height: 28px;
-        background-color: rgba(0, 0, 0, 0.1);
         border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.1);
 
         &::after {
           content: "";
@@ -69,6 +69,20 @@
 
           border-width: 0 3px 3px 0;
           transform: rotate(45deg);
+        }
+
+
+      }
+      .checked {
+        background-color: #2ecc71;
+        /*background-color: rgb(186, 73, 73);*/
+      }
+
+
+      .task__content {
+        .finished__task {
+          text-decoration: line-through;
+          opacity: 0.5;
         }
       }
 

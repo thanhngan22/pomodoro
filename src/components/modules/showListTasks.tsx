@@ -18,7 +18,7 @@ const ShowListTasks : React.FC<IProp> = ({user}) => {
         const _className = `${_classNameCommon} ${_classNameUnique} ${_css}`
         jsx.push (
             <li key={index} className={_className}>
-                <BoxTaskMini task={task} user = {user} />
+                <BoxTaskMini task={task} user = {user}  />
             </li>
         )
     })
