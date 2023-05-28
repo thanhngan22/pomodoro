@@ -11,51 +11,84 @@ import { CUserSetting, CTask } from "../interface";
 // components
 import ShowListTasks from "./modules/showListTasks";
 import BoxUpdateTask from "./modules/boxUpdateTask";
+import { time } from "console";
 
 // get data from local storage
 const data = localStorage.getItem("userData");
 // console.log("data from local storage: ", data);
 
-let userData : CUserSetting = data ? new CUserSetting(JSON.parse(data)) : new CUserSetting();
-
+let userData: CUserSetting = data
+  ? new CUserSetting(JSON.parse(data))
+  : new CUserSetting();
 
 const Pomofocus: React.FC = () => {
-  let timeStart = "25:00";
   const [User, setUser] = useState<CUserSetting>(userData);
-  // console.log("User setting: ", JSON.stringify(User, null, 2))
+  const [mins, setMins] = useState<number>(User.mode.getTimeMins());
+  const [secs, setSecs] = useState<number>(User.mode.getTimeSecs());
+  const [pause, setPause] = useState<boolean>(true);
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
 
   function handleOnChangeUser(newUser: CUserSetting) {
-    console.log("handle on change user ...")
+    console.log("handle on change user ...");
     setUser(newUser);
   }
 
   useEffect(() => {
     // set mode after first render
-  User.mode.setMode(User.mode.getMode());
-
-  }, [])
+    User.mode.setMode(User.mode.getMode());
+  }, []);
 
   useEffect(() => {
     // console.log("render cause user change ...");
 
     // write to local storage
     localStorage.setItem("userData", JSON.stringify(User, null, 2));
-    console.log("update user data to local storage ...")
+    // console.log("update user data to local storage ...")
   }, [User]);
+
+  useEffect(() => {
+    // start count down
+    let timeRemaining = mins * 60 + secs;
+    if (pause || timeRemaining <= 0) {
+      clearInterval(intervalId.current as NodeJS.Timeout);
+      return;
+    }
+    intervalId.current  = setInterval(() => {
+      timeRemaining--;
+      setMins(Math.floor(timeRemaining / 60));
+      setSecs(timeRemaining % 60);
+
+      if (timeRemaining <= 0) {
+        clearInterval(intervalId.current as NodeJS.Timeout);
+        setPause(true);
+        setMins(User.mode.getTimeMins());
+        setSecs(0);
+      }
+
+    }, 1000)
+  }, [pause])
 
   function handleOnclickTypesPomo(modeName: string) {
     User.mode.setMode(modeName);
+    setMins(User.mode.getTimeMins());
+    setSecs(User.mode.getTimeSecs());
     localStorage.setItem("userData", JSON.stringify(User, null, 2));
     return undefined;
   }
 
-  function changeTextStartBtn() {
+  function handleClickStartBtn() {
     const startBtn = document.querySelector(".start__button");
     if (!startBtn) return;
     if (startBtn.innerHTML === "START") {
+      startBtn.classList.add("click__Start");
       startBtn.innerHTML = "PAUSE";
+      setPause(false);
+      
     } else {
+      startBtn.classList.remove("click__Start");
       startBtn.innerHTML = "START";
+      setPause(true);
+
     }
   }
 
@@ -76,6 +109,9 @@ const Pomofocus: React.FC = () => {
     if (!inputElement) return;
     inputElement.focus();
   }
+
+  const timeShow =
+    mins.toString().padStart(2, "0") + ":" + secs.toString().padStart(2, "0");
 
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
@@ -100,10 +136,10 @@ const Pomofocus: React.FC = () => {
             Long Break
           </button>
         </div>
-        <div className="time__remaining px-20 py-8 text-8xl">{timeStart}</div>
+        <div className="time__remaining px-20 py-8 text-8xl">{timeShow}</div>
         <div className="start__button-container mb-8 ">
           <button
-            onClick={() => changeTextStartBtn()}
+            onClick={() => handleClickStartBtn()}
             className="start__button"
           >
             START

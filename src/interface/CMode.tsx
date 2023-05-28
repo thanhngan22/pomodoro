@@ -1,6 +1,8 @@
 export interface IMode {
   modeName: string;
-  time: number;
+  currentMins: number;
+  currrentSecs: number;
+
   timePomo: number;
   timeShortBreak: number;
   timeLongBreak: number;
@@ -14,10 +16,12 @@ export interface IMode {
 
 export class CMode implements IMode {
   modeName: string;
-  time: number;
   bgcolor: string;
 
   // default settings
+  currentMins: number;
+  currrentSecs: number;
+
   timePomo: number = 25;
   timeShortBreak: number = 5;
   timeLongBreak: number = 15;
@@ -29,23 +33,25 @@ export class CMode implements IMode {
   constructor(other? : CMode) {
     if (other) {
       this.modeName = other.modeName;
-      this.time = other.time;
+      this.currentMins = other.currentMins;
+      this.currrentSecs = other.currrentSecs;
       this.bgcolor = other.bgcolor;
       return;
     }
     this.modeName = "pomodoro";
-    this.time = 25;
+    this.currentMins = 25;
+    this.currrentSecs = 0;
     this.bgcolor = "#BA4949";
 
   }
 
   // methods
   getTimeStart() {
-    return this.time.toString().padStart(2, "0") + ":00";
+    return this.currentMins.toString().padStart(2, "0") + ":" + this.currrentSecs.toString().padStart(2, "0");
   }
 
   setMode(modeName: string) {
-    console.log("setmode", modeName);
+    // console.log("setmode", modeName);
     this.modeName = modeName;
 
     // highlight button
@@ -56,7 +62,8 @@ export class CMode implements IMode {
     switch (modeName) {
       case "pomodoro":
         this.bgcolor = this.bgcolorPomo;
-        this.time = this.timePomo;
+        this.currentMins = this.timePomo;
+        this.currrentSecs = 0;
         if (pomodoroBtn) {
           pomodoroBtn.classList.add("__active");
         }
@@ -66,7 +73,8 @@ export class CMode implements IMode {
         break;
       case "short-break":
         this.bgcolor = this.bgcolorShortBreak;
-        this.time = this.timeShortBreak;
+        this.currentMins = this.timeShortBreak;
+        this.currrentSecs = 0;
         if (shortBreakBtn) {
           shortBreakBtn.classList.add("__active");
         }
@@ -77,7 +85,8 @@ export class CMode implements IMode {
 
       case "long-break":
         this.bgcolor = this.bgcolorLongBreak;
-        this.time = this.timeLongBreak;
+        this.currentMins = this.timeLongBreak;
+        this.currrentSecs = 0;
         if (longBreakBtn) {
           longBreakBtn.classList.add("__active");
         }
@@ -108,7 +117,16 @@ export class CMode implements IMode {
     }
   }
 
-  getMode() {
+  getMode() : string {
     return this.modeName;
   }
+
+  getTimeMins() : number {
+    return this.currentMins
+  }
+
+  getTimeSecs() : number {
+    return this.currrentSecs
+  }
+
 }
