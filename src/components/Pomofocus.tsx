@@ -12,12 +12,9 @@ import { CUserSetting, CMode, CTask } from "../interface";
 import ShowListTasks from "./modules/showListTasks";
 import BoxUpdateTask from "./modules/boxUpdateTask";
 
-const mode = new CMode();
-mode.setMode("pomodoro");
-
 // get data from local storage
 const data = localStorage.getItem("userData");
-console.log("data from local storage: ", data);
+// console.log("data from local storage: ", data);
 
 let userData : CUserSetting = data ? new CUserSetting(JSON.parse(data)) : new CUserSetting();
 
@@ -26,6 +23,9 @@ const Pomofocus: React.FC = () => {
   let timeStart = "25:00";
   const [User, setUser] = useState<CUserSetting>(userData);
   // console.log("User setting: ", JSON.stringify(User, null, 2))
+
+  User.mode.setMode(User.mode.getMode());
+
 
   function handleOnChangeUser(newUser: CUserSetting) {
     console.log("handle on change user ...")
@@ -40,7 +40,8 @@ const Pomofocus: React.FC = () => {
   }, [User]);
 
   function handleOnclickTypesPomo(modeName: string) {
-    mode.setMode(modeName);
+    User.mode.setMode(modeName);
+    localStorage.setItem("userData", JSON.stringify(User, null, 2));
     return undefined;
   }
 

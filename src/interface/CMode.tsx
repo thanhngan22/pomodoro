@@ -1,5 +1,5 @@
 export interface IMode {
-  mode: string;
+  modeName: string;
   time: number;
   timePomo: number;
   timeShortBreak: number;
@@ -11,10 +11,9 @@ export interface IMode {
   bgcolorLongBreak: string;
 }
 
-export interface IPropMode {}
 
 export class CMode implements IMode {
-  mode: string;
+  modeName: string;
   time: number;
   bgcolor: string;
 
@@ -27,10 +26,17 @@ export class CMode implements IMode {
   bgcolorShortBreak: string = "#38858A";
   bgcolorLongBreak: string = "#397097";
 
-  constructor() {
-    this.mode = "pomodoro";
+  constructor(other? : CMode) {
+    if (other) {
+      this.modeName = other.modeName;
+      this.time = other.time;
+      this.bgcolor = other.bgcolor;
+      return;
+    }
+    this.modeName = "pomodoro";
     this.time = 25;
     this.bgcolor = "#BA4949";
+
   }
 
   // methods
@@ -38,16 +44,16 @@ export class CMode implements IMode {
     return this.time.toString().padStart(2, "0") + ":00";
   }
 
-  setMode(mode: string) {
-    console.log("setMode", mode);
-    this.mode = mode;
+  setMode(modeName: string) {
+    console.log("setmode", modeName);
+    this.modeName = modeName;
 
     // highlight button
     const pomodoroBtn = document.querySelector(".pomodoro__main-btn");
     const shortBreakBtn = document.querySelector(".Short__Break-btn");
     const longBreakBtn = document.querySelector(".Long__Break-btn");
 
-    switch (mode) {
+    switch (modeName) {
       case "pomodoro":
         this.bgcolor = this.bgcolorPomo;
         this.time = this.timePomo;
@@ -83,7 +89,7 @@ export class CMode implements IMode {
         break;
     }
 
-    // turn on mode
+    // turn on modeName
     const app = document.querySelector(".main__app");
     if (app) {
       app.setAttribute("style", `background-color: ${this.bgcolor}`);
@@ -100,5 +106,9 @@ export class CMode implements IMode {
         timeRemaining.innerHTML = this.getTimeStart();
       }
     }
+  }
+
+  getMode() {
+    return this.modeName;
   }
 }
