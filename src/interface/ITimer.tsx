@@ -8,5 +8,6 @@ export  interface ITimer {
     autoStartPomos : boolean;
 
     longBreakInterval: number;
+    countInterval: number;
     
 }

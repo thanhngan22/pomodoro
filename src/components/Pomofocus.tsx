@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 // svg and icons
 import threeDotsIcon from "../assets/icons/3dots.png";
 import plusIcon from "../assets/icons/plus.png";
+import nextModeIcon from "../assets/icons/next-mode.png";
 
 // interfaces and classes
 import { CUserSetting, CTask } from "../interface";
@@ -28,13 +29,18 @@ const Pomofocus: React.FC = () => {
   const [pause, setPause] = useState<boolean>(true);
   const intervalId = useRef<NodeJS.Timeout | null>(null);
 
+  // time format to display
+  const timeShow =
+    mins.toString().padStart(2, "0") + ":" + secs.toString().padStart(2, "0");
+
+  // when add new task in child component
   function handleOnChangeUser(newUser: CUserSetting) {
     console.log("handle on change user ...");
     setUser(newUser);
   }
 
+  // set mode after first render
   useEffect(() => {
-    // set mode after first render
     User.mode.setMode(User.mode.getMode());
   }, []);
 
@@ -53,7 +59,7 @@ const Pomofocus: React.FC = () => {
       clearInterval(intervalId.current as NodeJS.Timeout);
       return;
     }
-    intervalId.current  = setInterval(() => {
+    intervalId.current = setInterval(() => {
       timeRemaining--;
       setMins(Math.floor(timeRemaining / 60));
       setSecs(timeRemaining % 60);
@@ -61,13 +67,16 @@ const Pomofocus: React.FC = () => {
       if (timeRemaining <= 0) {
         clearInterval(intervalId.current as NodeJS.Timeout);
         setPause(true);
-        setMins(User.mode.getTimeMins());
-        setSecs(0);
+
+        // increase number of pomodoro interval and update to local storage
+        User.setCountInterval(User.getCountInterval() + 1);
+        localStorage.setItem("userData", JSON.stringify(User, null, 2));
+        switchNextMode();
       }
+    }, 1000);
+  }, [pause]);
 
-    }, 1000)
-  }, [pause])
-
+  // handle event switch mode [pomodoro, short-break, long-break]
   function handleOnclickTypesPomo(modeName: string) {
     User.mode.setMode(modeName);
     setMins(User.mode.getTimeMins());
@@ -76,6 +85,7 @@ const Pomofocus: React.FC = () => {
     return undefined;
   }
 
+  // handle event click button start
   function handleClickStartBtn() {
     const startBtn = document.querySelector(".start__button");
     if (!startBtn) return;
@@ -83,12 +93,10 @@ const Pomofocus: React.FC = () => {
       startBtn.classList.add("click__Start");
       startBtn.innerHTML = "PAUSE";
       setPause(false);
-      
     } else {
       startBtn.classList.remove("click__Start");
       startBtn.innerHTML = "START";
       setPause(true);
-
     }
   }
 
@@ -110,8 +118,25 @@ const Pomofocus: React.FC = () => {
     inputElement.focus();
   }
 
-  const timeShow =
-    mins.toString().padStart(2, "0") + ":" + secs.toString().padStart(2, "0");
+  // handle event switch mode when click next mode button
+  const switchNextMode = () => {
+    const mode = User.mode.getMode();
+    // if pomodoro mode : check if countInterval == longBreakInterval:
+    //                    switch to long break mode and set countInterval = 0
+    //                    else switch to short break mode
+    // if short break mode: switch to pomodoro mode
+    // if long break mode: switch to pomodoro mode
+    if (mode === "pomodoro") {
+      if (User.getCountInterval() === User.getLongBreakInterval()) {
+        User.mode.setMode("long-break");
+        User.setCountInterval(0);
+      } else {
+        User.mode.setMode("short-break");
+      }
+    } else {
+      User.mode.setMode("pomodoro");
+    }
+  };
 
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
@@ -137,14 +162,30 @@ const Pomofocus: React.FC = () => {
           </button>
         </div>
         <div className="time__remaining px-20 py-8 text-8xl">{timeShow}</div>
-        <div className="start__button-container mb-8 ">
-          <button
-            onClick={() => handleClickStartBtn()}
-            className="start__button"
-          >
-            START
-          </button>
-          <button className="next__mode-btn"></button>
+        <div className="start__button-container mb-8 flex items-center ml-28  ">
+          <div className="">
+            <button
+              onClick={() => handleClickStartBtn()}
+              className="start__button "
+            >
+              START
+            </button>
+          </div>
+          <div className="w-20"></div>
+          <div className=" ">
+            <button
+              className="next__mode-btn  w-8 h-8"
+              onClick={() => switchNextMode()}
+            >
+              <div className="next-mode__icon--wrapper">
+                <img
+                  src={nextModeIcon}
+                  alt="next-mode-icon"
+                  className="w-6 h-6"
+                />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
       <div className="target__heading text-center py-4">

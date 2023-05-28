@@ -30,6 +30,7 @@ export class CUserSetting implements ISettings {
       autoStartPomos: true,
 
       longBreakInterval: 4,
+      countInterval: 0,
     };
     this.theme = {
       color: {
@@ -97,6 +98,10 @@ export class CUserSetting implements ISettings {
     this.timer.longBreakInterval = interval;
   }
 
+  setCountInterval(count: number): void {
+    this.timer.countInterval = count;
+  }
+
   // getters
   getTimePomo(): number {
     return this.timer.timePomo;
@@ -120,6 +125,10 @@ export class CUserSetting implements ISettings {
 
   getLongBreakInterval(): number {
     return this.timer.longBreakInterval;
+  }
+
+  getCountInterval(): number {
+    return this.timer.countInterval;
   }
 
   // methods for background color
