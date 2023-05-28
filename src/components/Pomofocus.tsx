@@ -56,7 +56,7 @@ const Pomofocus : React.FC = () => {
     addTaskBtn.classList.add("hidden");
 
     // focus input when show box 
-    const inputElement = document.querySelector(".update__text") as HTMLInputElement;
+    const inputElement = addTaskBox.querySelector(".update__text") as HTMLInputElement;
     if (!inputElement) return;
     inputElement.focus();
   }
@@ -111,7 +111,7 @@ const Pomofocus : React.FC = () => {
       </div>
       <div className="add__task  ">
       <div className="add__task-box hidden">
-          <BoxUpdateTask task={new CTask()} user={User} onUserChange={handleOnChangeUser}/>
+          <BoxUpdateTask task={new CTask()} user={User} onUserChange={handleOnChangeUser} />
         </div>
         <button className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80"
         onClick={() => handleOnClickAddTask()}

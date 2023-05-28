@@ -12,7 +12,7 @@ interface IProp {
 }
 
 const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
-  const [nameTask, setNameTask] = useState<string>(task.getName());
+  const [nameTask, setNameTask] = useState<string>(task.getName() || "");
   const cloneUser = new CUserSetting(user);
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -64,6 +64,9 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
     addTaskBox?.classList.add("hidden");
     if (addTaskBtn?.classList.contains("hidden")) {
       addTaskBtn?.classList.remove("hidden");
+
+      // reset value of input
+      setNameTask("");
     }
     onUserChange && onUserChange(cloneUser);
   }
