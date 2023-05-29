@@ -60,8 +60,26 @@ const Pomofocus: React.FC = () => {
     progress_bar.style.animationFillMode = "forwards";
   }
 
+  // delay countdown when click change mode or next btn\
+  function delayCountDown() {
+        // set pause
+        setPause(true);
+
+        // change inner html of start btn if current is pause
+        const startBtn = document.querySelector(".start__button");
+        if (startBtn) {
+          if (startBtn.innerHTML === "PAUSE") {
+            startBtn.innerHTML = "START";
+          }
+        }
+
+  }
+
   // handle event switch mode when click next mode button
   const switchNextMode = () => {
+    // set pause
+    delayCountDown();
+
     const mode = User.mode.getMode();
     // if pomodoro mode : check if countInterval == longBreakInterval:
     //                    switch to long break mode and set countInterval = 0
@@ -77,8 +95,9 @@ const Pomofocus: React.FC = () => {
       }
     } else {
       User.mode.setMode("pomodoro");
-      setMins(User.mode.getTimeMins());
     }
+    setMins(User.mode.getTimeMins());
+    setSecs(User.mode.getTimeSecs());
     resetProgressBar();
   };
 
@@ -127,6 +146,9 @@ const Pomofocus: React.FC = () => {
 
   // handle event switch mode [pomodoro, short-break, long-break]
   function handleOnclickTypesPomo(modeName: string) {
+    // set pause
+    delayCountDown();
+
     User.mode.setMode(modeName);
     setMins(User.mode.getTimeMins());
     setSecs(User.mode.getTimeSecs());
