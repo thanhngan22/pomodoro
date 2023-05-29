@@ -55,7 +55,10 @@
       background-color: white;
       border-radius: 5px;
       width: full;
-      padding: 16px 16px;
+    
+        .task__item-wrapper {
+          padding: 16px;
+        }
 
       .checkIcon__container {
         position: relative;
@@ -86,6 +89,13 @@
 
 
       .task__content {
+
+        .task__name {
+          max-width: 300px;
+          word-wrap: break-word;
+          
+        }
+
         .finished__task {
           text-decoration: line-through;
           opacity: 0.5;

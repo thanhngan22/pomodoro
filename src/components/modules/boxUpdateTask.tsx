@@ -34,11 +34,9 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
     console.log("method onclick : ", method);
 
     // if name task is empty, do nothing
-    if (nameTask === "") return;
 
     const addTaskBox = document.querySelector(".add__task-box");
     const addTaskBtn = document.querySelector(".add__task-btn");
-    if (!addTaskBox || !addTaskBtn) return;
 
     switch (method) {
       case "cancel":
@@ -54,7 +52,9 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
         console.log("update task");
 
         // case add task
-        if (addTaskBtn.classList.contains("hidden")) {
+        if (addTaskBtn?.classList.contains("hidden")) {
+          if (nameTask === "") return;
+
           const temp = new CTask();
 
           // config task
@@ -80,13 +80,33 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
     }
 
     // show addTaskBtn and hide box update task when click save button
-    addTaskBox?.classList.add("hidden");
     if (addTaskBtn?.classList.contains("hidden")) {
+      // console.log("come here");
+      addTaskBox?.classList.add("hidden");
       addTaskBtn?.classList.remove("hidden");
-
       // reset value of input
       setNameTask("");
+    } else {
+      // case edit specific task
+      const className = ".box-task__item--" + task.id;
+      const parentElement = document.querySelector(className);
+      if (!parentElement) return;
+
+      // from parent element, find box update task element
+      const boxEditTask = parentElement.querySelector(
+        ".box__edit-specific-task"
+      );
+      if (!boxEditTask) return;
+      boxEditTask.classList.add("hidden");
+
+      const taskItemMain = parentElement.querySelector(".task__item-wrapper");
+      if (taskItemMain) {
+        taskItemMain.classList.remove("hidden");
+        // remove padding
+        taskItemMain.setAttribute("style", "padding: 16px;");
+      }
     }
+    console.log("has onUserChange")
     onUserChange && onUserChange(cloneUser);
   }
 
@@ -155,7 +175,7 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
               className="update__increase  mr-1"
               onClick={() => {
                 setQuantity(quantity + 1);
-                setQuantityStr(quantity.toString());
+                setQuantityStr((quantity + 1).toString());
               }}
             >
               <img
@@ -167,8 +187,13 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
             <button
               className="update__decrease"
               onClick={() => {
-                quantity - 1 > 0 ? setQuantity(quantity - 1) : setQuantity(1);
-                setQuantityStr(quantity.toString());
+                if (quantity - 1 > 0) {
+                  setQuantity(quantity - 1);
+                  setQuantityStr((quantity - 1).toString());
+                } else {
+                  setQuantity(1);
+                  setQuantityStr("1");
+                }
               }}
             >
               <img

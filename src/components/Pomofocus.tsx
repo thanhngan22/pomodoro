@@ -12,7 +12,6 @@ import { CUserSetting, CTask } from "../interface";
 // components
 import ShowListTasks from "./modules/showListTasks";
 import BoxUpdateTask from "./modules/boxUpdateTask";
-import { time } from "console";
 
 // get data from local storage
 const data = localStorage.getItem("userData");
@@ -28,6 +27,10 @@ const Pomofocus: React.FC = () => {
   const [secs, setSecs] = useState<number>(User.mode.getTimeSecs());
   const [pause, setPause] = useState<boolean>(true);
   const intervalId = useRef<NodeJS.Timeout | null>(null);
+  const [numTaskDone, setNumTasksDone] = useState<number>(User.todolist.getTotalNumTasksDone());
+  const [numTasks, setNumTasks] = useState<number>(User.todolist.getNumTaskUnFinish());
+  const [timeFinish, setTimeFinish] = useState<string>(User.getTimeFinish());
+  const [totalTime, setTotalTime] = useState<number>(Math.round(User.getTimeTodo()/60 *10)/10);
 
   // time format to display
   const timeShow =
@@ -35,7 +38,7 @@ const Pomofocus: React.FC = () => {
 
   // when add new task in child component
   function handleOnChangeUser(newUser: CUserSetting) {
-    console.log("handle on change user ...");
+    // console.log("handle on change user ...");
     setUser(newUser);
   }
 
@@ -108,7 +111,11 @@ const Pomofocus: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // console.log("render cause user change ...");
+    console.log("render cause user change ...");
+    setNumTasks(User.todolist.getNumTaskUnFinish());
+    setNumTasksDone(User.todolist.getTotalNumTasksDone());
+    setTimeFinish(User.getTimeFinish());
+    setTotalTime(Math.round(User.getTimeTodo()/60 *10)/10);
 
     // write to local storage
     localStorage.setItem("userData", JSON.stringify(User, null, 2));
@@ -273,7 +280,7 @@ const Pomofocus: React.FC = () => {
         </button>
       </div>
       <div className="tasks__list my-5">
-        <ShowListTasks user={User} />
+        <ShowListTasks user={User} onUserChange={handleOnChangeUser} />
       </div>
       <div className="add__task  ">
         <div className="add__task-box hidden">
@@ -297,13 +304,13 @@ const Pomofocus: React.FC = () => {
       </div>
       <div className="more__inf text-center flex  justify-center font-semibold">
         <p className="pomos pl-1 pr-10">
-          <span> {"Pomos: "} { User.todolist.getTotalNumTasksDone()}</span>
+          <span> {"Pomos: "} { numTaskDone}</span>
           <span className="text-xs divide-items">/</span>
-          <span>{User.todolist.getTotalQuantity()}</span>
+          <span>{numTasks}</span>
         </p>
         <p className="finishAt">
-       <span className="">{" Finish at: "}{User.getTimeFinish()}</span>
-       <span className="text-xs font-normal pl-1">{`(${Math.round(User.getTimeTodo()/60 *10)/10} h) `}</span>
+       <span className="">{" Finish at: "}{timeFinish}</span>
+       <span className="text-xs font-normal pl-1">{`(${totalTime} h) `}</span>
         </p>
       </div>
     </div>

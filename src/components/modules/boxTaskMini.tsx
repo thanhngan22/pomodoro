@@ -4,17 +4,19 @@ import { CTask, CUserSetting } from "../../interface";
 
 
 // hooks
-import {useState} from "react";
 
 interface IProp {
   task: CTask;
   user: CUserSetting;
+  onUserChange?: (newUser: CUserSetting) => void;
 }
 
-const BoxTaskMini: React.FC<IProp> = ({ task, user}) => {
+const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
 
   const status = task.status === "finished" ? "finished__task" : "";
   const checked = task.status === "finished" ? "checked" : "";
+
+  const cloneUser = new CUserSetting(user);
 
   function markFinishedTask() {
     const className = ".box-task__item--" + task.id;
@@ -29,24 +31,50 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user}) => {
     const inputTaskNameElement = parentElement.querySelector(".task__name");
     if (!inputTaskNameElement) return;
 
-    console.log("list :: ", user.todolist.list)
-    console.log("task id: ", task.getId())
+    // console.log("list :: ", user.todolist.list)
+    // console.log("task id: ", task.getId())
 
 
     if (inputTaskNameElement.classList.contains("finished__task")) {
-      user.todolist.list[task.getId() - 1].setStatus("unfinished");
+      cloneUser.todolist.list[task.getId() - 1].setStatus("unfinished");
 
       inputTaskNameElement.classList.remove("finished__task");
       checkIcon.classList.remove("checked");
     } else {
-      user.todolist.list[task.getId() - 1].setStatus("finished");
+      cloneUser.todolist.list[task.getId() - 1].setStatus("finished");
       inputTaskNameElement.classList.add("finished__task");
       checkIcon.classList.add("checked");
     }
 
-    // update local storage
-    localStorage.setItem("userData", JSON.stringify(user));
+    onUserChange && onUserChange(cloneUser);
 
+  }
+
+  function showBoxEditTask() {
+    // console.log("show box edit task")
+    const className = ".box-task__item--" + task.id;
+    const parentElement = document.querySelector(className);
+    if (!parentElement) return;
+
+    // from parent element, find box update task element
+    const boxEditTask = parentElement.querySelector(".box__edit-specific-task");
+    if (!boxEditTask) return;
+
+    // console.log("box edit task: ", boxEditTask)
+
+    if (boxEditTask.classList.contains("hidden")) {
+      // console.log("remove hidden")
+      // hidden box task item
+      const taskItemMain = parentElement.querySelector(".task__item-wrapper");
+      if (taskItemMain) {
+        taskItemMain.classList.add("hidden");
+
+        // remove padding
+        taskItemMain.setAttribute("style", "padding: 0px;")
+      }
+
+      boxEditTask.classList.remove("hidden");
+    } 
   }
 
   return (
@@ -60,11 +88,11 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user}) => {
             <div className={`checkIcon__container ${checked} `}></div>
           </button>
           <div className="task__content w-5/6  flex items-center ">
-            <span className={`task__name text-black px-2 text-center font-semibold opacity-85 ${status}`}>
+            <span className={`task__name text-black px-2 font-semibold opacity-85 ${status}`}>
               {task.getName()}
             </span>
           </div>
-          <div className="task__config flex justify-between">
+          <div className="task__config flex justify-between items-center">
             <div className="task__count text-gray-700 opacity-80  ">
             <span className="num__task-done font-semibold">
               {task.getNumTasksDone()}
@@ -74,7 +102,9 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user}) => {
             {task.getQuantity()}
             </span>
             </div>
-            <button className="border rounded px-1.5 py-1.5   ">
+            <button className="border rounded px-1.5 py-1.5 w-8 h-8  "
+            onClick={() => showBoxEditTask()}
+            >
               <img
                 src={threeDotsBlackIcon}
                 alt="thee-dots-black-icon"
@@ -83,10 +113,14 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user}) => {
             </button>
           </div>
         </div>
-        <div className="task__note bg-yellow-100 py-3 ml-5 mt-3 hidden "></div>
+        <div className="task__note bg-yellow-100 py-3 ml-5 mt-3 hidden ">
+          <span className="task__note-content">
+            {task.getNote()}
+          </span>
+        </div>
       </div>
-      <div className="hidden">
-        <BoxUpdateTask task={task} user={user} />
+      <div className="hidden box__edit-specific-task">
+        <BoxUpdateTask task={task} user={user} onUserChange={onUserChange}/>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ export class CTask implements ITask {
         this.id = -1;
         this.name = "";
         this.numTasksDone = 0;
-        this.quantity = 0;
+        this.quantity = 1;
         this.note = "";
         this.status = "unfinished";
     }
@@ -116,7 +116,7 @@ export class CListTasks {
         task.id = this.list.length + 1;
         this.list.push(task);
 
-        console.log("list after push: ", JSON.stringify(this.list, null, 2))
+        // console.log("list after push: ", JSON.stringify(this.list, null, 2))
     }
 
     delete(id: number) :void {
@@ -132,13 +132,13 @@ export class CListTasks {
 
     update(task: CTask) : void {
         console.log("method: update task");
-        console.log("length list: ", this.list.length)
+        // console.log("length list: ", this.list.length)
         if (this.list.length === 0 || this.list.length < task.getId()) {
             this.push(task);
             return;
         }
         this.list.forEach((item) => {
-            console.log( "updating ...");
+            // console.log( "updating ...");
             // if exists task : update and return
             if (item.getId() === task.getId()) {
                 item.setName(task.getName())
