@@ -39,17 +39,17 @@ const Pomofocus: React.FC = () => {
     setUser(newUser);
   }
 
-  // reset bar from start 
-  function resetProgressBar () {
+  // reset bar from start
+  function resetProgressBar() {
     // reset progress bar
     const timeCountDown = User.mode.getTimeMins() * 60;
     // const timeCountDown = 5;
 
-    console.log("timeCountDown: ", timeCountDown)
+    // console.log("timeCountDown: ", timeCountDown);
     // set animation progress bar duration
     const progress_bar = document.getElementById("progress__bar");
     if (!progress_bar) return;
-    
+
     progress_bar.style.animation = "none";
     void progress_bar.offsetWidth;
     progress_bar.style.width = "0px";
@@ -62,17 +62,16 @@ const Pomofocus: React.FC = () => {
 
   // delay countdown when click change mode or next btn\
   function delayCountDown() {
-        // set pause
-        setPause(true);
+    // set pause
+    setPause(true);
 
-        // change inner html of start btn if current is pause
-        const startBtn = document.querySelector(".start__button");
-        if (startBtn) {
-          if (startBtn.innerHTML === "PAUSE") {
-            startBtn.innerHTML = "START";
-          }
-        }
-
+    // change inner html of start btn if current is pause
+    const startBtn = document.querySelector(".start__button");
+    if (startBtn) {
+      if (startBtn.innerHTML === "PAUSE") {
+        startBtn.innerHTML = "START";
+      }
+    }
   }
 
   // handle event switch mode when click next mode button
@@ -194,6 +193,12 @@ const Pomofocus: React.FC = () => {
     const addTaskBox = document.querySelector(".add__task-box");
     if (!addTaskBox) return;
 
+    // hide update num tasks done and split act when add task
+    const boxTaskDone = addTaskBox.querySelector(".update__num-tasks-done");
+    boxTaskDone?.classList.add("hidden");
+    const splitAct = addTaskBox.querySelector(".update__act--split");
+    splitAct?.classList.add("hidden");
+
     addTaskBox.classList.remove("hidden");
     const addTaskBtn = document.querySelector(".add__task-btn");
     if (!addTaskBtn) return;
@@ -290,9 +295,16 @@ const Pomofocus: React.FC = () => {
           <span className="self-center">Add Task</span>
         </button>
       </div>
-      <div className="more__inf text-center">
-        Pomos: <span></span>
-        Finish At: <span></span>
+      <div className="more__inf text-center flex  justify-center font-semibold">
+        <p className="pomos pl-1 pr-10">
+          <span> {"Pomos: "} { User.todolist.getTotalNumTasksDone()}</span>
+          <span className="text-xs divide-items">/</span>
+          <span>{User.todolist.getTotalQuantity()}</span>
+        </p>
+        <p className="finishAt">
+       <span className="">{" Finish at: "}{User.getTimeFinish()}</span>
+       <span className="text-xs font-normal pl-1">{`(${Math.round(User.getTimeTodo()/60 *10)/10} h) `}</span>
+        </p>
       </div>
     </div>
   );

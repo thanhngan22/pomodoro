@@ -25,7 +25,7 @@ export class CTask implements ITask {
         this.numTasksDone = 0;
         this.quantity = 0;
         this.note = "";
-        this.status = "";
+        this.status = "unfinished";
     }
 
     // methods
@@ -45,7 +45,9 @@ export class CTask implements ITask {
     }
 
     setQuantity(quantity: number) : void {
-        this.quantity = quantity;
+        if (quantity > 0) {
+            this.quantity = quantity;
+        }
     }
 
     setNote (note: string) :void {
@@ -149,6 +151,38 @@ export class CListTasks {
                 return
             }
         })
+    }
+
+
+    // other methods
+    // get all num task done of list tasks
+    getTotalNumTasksDone() : number {
+        let total = 0;
+        this.list.forEach((task) => {
+            total += task.getNumTasksDone();
+        })
+        return total;
+    }
+
+    // get all quantity of list tasks
+    getTotalQuantity() : number {
+        let total = 0;
+        this.list.forEach((task) => {
+            total += task.getQuantity();
+        })
+        return total;
+    }
+
+    getNumTaskUnFinish() : number {
+        let numTasks = 0;
+        this.list.forEach((task) => {
+            if (task.status !== "finished") {
+                const num = task.getQuantity() - task.getNumTasksDone();
+                numTasks += num > 0 ? num : 0;
+            }
+        })
+        // console.log("numTasks unfinish: ", numTasks);
+        return numTasks;
     }
 
 }

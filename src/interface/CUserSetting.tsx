@@ -1,4 +1,13 @@
-import { ISettings, ITimer, ISound, ITheme, IReminder, ISoundProps, CListTasks, CMode } from ".";
+import {
+  ISettings,
+  ITimer,
+  ISound,
+  ITheme,
+  IReminder,
+  ISoundProps,
+  CListTasks,
+  CMode,
+} from ".";
 
 export class CUserSetting implements ISettings {
   // attributes
@@ -6,11 +15,11 @@ export class CUserSetting implements ISettings {
   sound: ISound;
   theme: ITheme;
   notification: IReminder;
-  todolist : CListTasks;
+  todolist: CListTasks;
   mode: CMode;
 
   // default constructor
-  constructor(other? : CUserSetting) {
+  constructor(other?: CUserSetting) {
     if (other) {
       this.timer = other.timer;
       this.sound = other.sound;
@@ -256,7 +265,7 @@ export class CUserSetting implements ISettings {
     // create a map of sound name and path from alarmSounds
     let map: Map<string, string> = new Map();
     this.sound.alarmSounds.forEach((element) => {
-        map.set(element.name, element.path);
+      map.set(element.name, element.path);
     });
     return map.get(this.getCurrentAlarmSoundName()) || "";
   }
@@ -265,8 +274,33 @@ export class CUserSetting implements ISettings {
     // create a map of sound name and path from tickingSounds
     let map: Map<string, string> = new Map();
     this.sound.tickingSounds.forEach((element) => {
-        map.set(element.name, element.path);
+      map.set(element.name, element.path);
     });
     return map.get(this.getCurrentTickingSoundName()) || "";
+  }
+
+  // others
+  getTimeTodo(): number {
+    // time todo
+    const numTaskTodo = this.todolist.getNumTaskUnFinish();
+    const timeTodo = numTaskTodo * this.timer.timePomo;
+    return timeTodo;
+  }
+
+  getTimeFinish(): string {
+    // current time
+    const currentHours = new Date().getHours();
+    const currentMins = new Date().getMinutes();
+
+    // guess time finish
+    const timeFinish = currentHours * 60 + currentMins + this.getTimeTodo();
+    const hoursFinish = Math.floor(timeFinish / 60) % 24;
+    const minsFinish = timeFinish % 60;
+
+    return (
+      hoursFinish.toString().padStart(2, "0") +
+      ":" +
+      minsFinish.toString().padStart(2, "0")
+    );
   }
 }
