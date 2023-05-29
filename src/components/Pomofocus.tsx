@@ -55,6 +55,11 @@ const Pomofocus: React.FC = () => {
   useEffect(() => {
     // start count down
     let timeRemaining = mins * 60 + secs;
+    // set animation progress bar duration
+    const progress_bar = document.getElementById("progress__bar");
+    if (!progress_bar) return;
+    progress_bar.style.animationDuration = `${timeRemaining}s`;
+
     if (pause || timeRemaining <= 0) {
       clearInterval(intervalId.current as NodeJS.Timeout);
       return;
@@ -88,15 +93,30 @@ const Pomofocus: React.FC = () => {
   // handle event click button start
   function handleClickStartBtn() {
     const startBtn = document.querySelector(".start__button");
+    const progress_bar = document.getElementById("progress__bar");
     if (!startBtn) return;
+    if (!progress_bar) return;
+
     if (startBtn.innerHTML === "START") {
+      // start countdown time
+
       startBtn.classList.add("click__Start");
       startBtn.innerHTML = "PAUSE";
       setPause(false);
+
+      // active animation progress bar
+
+
+      progress_bar.style.animationPlayState = "running";
     } else {
+      // pause countdown time
+
       startBtn.classList.remove("click__Start");
       startBtn.innerHTML = "START";
       setPause(true);
+
+      // delay animation progress bar
+      progress_bar.style.animationPlayState = "paused";
     }
   }
 

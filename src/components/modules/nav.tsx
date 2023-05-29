@@ -28,8 +28,8 @@ export default function Nav() {
           </button>
         </div>
       </div>
-      <div className="progress__bar">
-
+      <div className="progress__bar-container">
+        <div id="progress__bar"></div>
       </div>
     </div>
   );
