@@ -78,9 +78,10 @@
 
   @keyframes progress {
     0% {
-      width: 0px;
+      width: 0;
     }
+
     100% {
-      width: 620px;
+      width: 100%;
     }
   }

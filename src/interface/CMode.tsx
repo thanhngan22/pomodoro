@@ -13,7 +13,6 @@ export interface IMode {
   bgcolorLongBreak: string;
 }
 
-
 export class CMode implements IMode {
   modeName: string;
   bgcolor: string;
@@ -30,7 +29,7 @@ export class CMode implements IMode {
   bgcolorShortBreak: string = "#38858A";
   bgcolorLongBreak: string = "#397097";
 
-  constructor(other? : CMode) {
+  constructor(other?: CMode) {
     if (other) {
       this.modeName = other.modeName;
       this.currentMins = other.currentMins;
@@ -42,16 +41,19 @@ export class CMode implements IMode {
     this.currentMins = 25;
     this.currrentSecs = 0;
     this.bgcolor = "#BA4949";
-
   }
 
   // methods
   getTimeStart() {
-    return this.currentMins.toString().padStart(2, "0") + ":" + this.currrentSecs.toString().padStart(2, "0");
+    return (
+      this.currentMins.toString().padStart(2, "0") +
+      ":" +
+      this.currrentSecs.toString().padStart(2, "0")
+    );
   }
 
   setMode(modeName: string) {
-    // console.log("setmode", modeName);
+    console.log("setmode", modeName);
     this.modeName = modeName;
 
     // highlight button
@@ -117,16 +119,15 @@ export class CMode implements IMode {
     }
   }
 
-  getMode() : string {
+  getMode(): string {
     return this.modeName;
   }
 
-  getTimeMins() : number {
-    return this.currentMins
+  getTimeMins(): number {
+    return this.currentMins;
   }
 
-  getTimeSecs() : number {
-    return this.currrentSecs
+  getTimeSecs(): number {
+    return this.currrentSecs;
   }
-
 }

@@ -39,9 +39,54 @@ const Pomofocus: React.FC = () => {
     setUser(newUser);
   }
 
+  // reset bar from start 
+  function resetProgressBar () {
+    // reset progress bar
+    const timeCountDown = User.mode.getTimeMins() * 60;
+    // const timeCountDown = 5;
+
+    console.log("timeCountDown: ", timeCountDown)
+    // set animation progress bar duration
+    const progress_bar = document.getElementById("progress__bar");
+    if (!progress_bar) return;
+    
+    progress_bar.style.animation = "none";
+    void progress_bar.offsetWidth;
+    progress_bar.style.width = "0px";
+    progress_bar.style.animation = "progress";
+    progress_bar.style.animationPlayState = "paused";
+    progress_bar.style.animationTimingFunction = "linear";
+    progress_bar.style.animationDuration = `${timeCountDown}s`;
+    progress_bar.style.animationFillMode = "forwards";
+  }
+
+  // handle event switch mode when click next mode button
+  const switchNextMode = () => {
+    const mode = User.mode.getMode();
+    // if pomodoro mode : check if countInterval == longBreakInterval:
+    //                    switch to long break mode and set countInterval = 0
+    //                    else switch to short break mode
+    // if short break mode: switch to pomodoro mode
+    // if long break mode: switch to pomodoro mode
+    if (mode === "pomodoro") {
+      if (User.getCountInterval() === User.getLongBreakInterval()) {
+        User.mode.setMode("long-break");
+        User.setCountInterval(0);
+      } else {
+        User.mode.setMode("short-break");
+      }
+    } else {
+      User.mode.setMode("pomodoro");
+      setMins(User.mode.getTimeMins());
+    }
+    resetProgressBar();
+  };
+
   // set mode after first render
   useEffect(() => {
     User.mode.setMode(User.mode.getMode());
+    // reset progress bar
+    resetProgressBar();
   }, []);
 
   useEffect(() => {
@@ -55,10 +100,6 @@ const Pomofocus: React.FC = () => {
   useEffect(() => {
     // start count down
     let timeRemaining = mins * 60 + secs;
-    // set animation progress bar duration
-    const progress_bar = document.getElementById("progress__bar");
-    if (!progress_bar) return;
-    progress_bar.style.animationDuration = `${timeRemaining}s`;
 
     if (pause || timeRemaining <= 0) {
       clearInterval(intervalId.current as NodeJS.Timeout);
@@ -72,6 +113,9 @@ const Pomofocus: React.FC = () => {
       if (timeRemaining <= 0) {
         clearInterval(intervalId.current as NodeJS.Timeout);
         setPause(true);
+        const progress_bar = document.getElementById("progress__bar");
+        if (!progress_bar) return;
+        progress_bar.style.animationPlayState = "paused";
 
         // increase number of pomodoro interval and update to local storage
         User.setCountInterval(User.getCountInterval() + 1);
@@ -87,6 +131,10 @@ const Pomofocus: React.FC = () => {
     setMins(User.mode.getTimeMins());
     setSecs(User.mode.getTimeSecs());
     localStorage.setItem("userData", JSON.stringify(User, null, 2));
+
+    // reset progress bar
+    resetProgressBar();
+
     return undefined;
   }
 
@@ -105,7 +153,6 @@ const Pomofocus: React.FC = () => {
       setPause(false);
 
       // active animation progress bar
-
 
       progress_bar.style.animationPlayState = "running";
     } else {
@@ -137,26 +184,6 @@ const Pomofocus: React.FC = () => {
     if (!inputElement) return;
     inputElement.focus();
   }
-
-  // handle event switch mode when click next mode button
-  const switchNextMode = () => {
-    const mode = User.mode.getMode();
-    // if pomodoro mode : check if countInterval == longBreakInterval:
-    //                    switch to long break mode and set countInterval = 0
-    //                    else switch to short break mode
-    // if short break mode: switch to pomodoro mode
-    // if long break mode: switch to pomodoro mode
-    if (mode === "pomodoro") {
-      if (User.getCountInterval() === User.getLongBreakInterval()) {
-        User.mode.setMode("long-break");
-        User.setCountInterval(0);
-      } else {
-        User.mode.setMode("short-break");
-      }
-    } else {
-      User.mode.setMode("pomodoro");
-    }
-  };
 
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
