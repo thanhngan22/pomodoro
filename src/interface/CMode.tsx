@@ -130,4 +130,8 @@ export class CMode implements IMode {
   getTimeSecs(): number {
     return this.currrentSecs;
   }
+
+  getBgColor() : string {
+    return this.bgcolor;
+  }
 }

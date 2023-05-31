@@ -3,6 +3,7 @@ import graphIcon from "../../assets/icons/graph.png";
 import settingIcon from "../../assets/icons/setting.png";
 import userIcon from "../../assets/icons/user.png";
 
+
 import { Link } from "react-router-dom";
 
 export default function Nav() {
@@ -22,10 +23,10 @@ export default function Nav() {
             <img src={settingIcon} alt="setting" className="w-4 h-4 mr-1 " />
             <span>Setting</span>
           </button>
-          <button className="nav__menu-item nav__login ">
+          <Link to='/login' className="nav__menu-item nav__login ">
             <img src={userIcon} alt="user" className="w-4 h-4 mr-1 " />
             <span>Login</span>
-          </button>
+          </Link>
         </div>
       </div>
       <div className="progress__bar-container">
