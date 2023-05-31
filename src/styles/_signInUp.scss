@@ -1,6 +1,6 @@
-.login__container {
+.login__container, .signup__container {
 
-    .login__box-tittle > h2{
+    .login__box-tittle > h2, .signup__box-tittle > h2{
         text-shadow: rgba(255,255,255,0.6) 7px 3px 4px;
     }
 
@@ -14,11 +14,15 @@
         box-shadow: rgb(196, 196, 196) 2px 2px 8px;
     }
 
-    .login__button {
+    .login__button, .signup__button {
         box-shadow: rgba(0,0,0,0.6) 5px 6px 4px;
     }
 
-    .login__google-btn {
+    .login__google-btn, .signup__google-btn {
         box-shadow: rgba(0,0,0,0.2) 3px 3px 8px;
+    }
+
+    .signup__form-container {
+        width: 270px;
     }
 }

@@ -7,6 +7,7 @@ import Privacy from './Privacy';
 import SimplePage from './SimplePage';
 import ErrorPage from './ErrorPage';
 import Login from './Login';
+import SignUp from './SignUp';
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
     {
         path: "/login",
         element: <Login/>,
+    },
+    {
+        path: "/signup",
+        element: <SignUp/>,
     },
     {
         path: "*",
