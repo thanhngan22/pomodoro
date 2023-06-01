@@ -101,9 +101,23 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange }) => {
     element.classList.remove("hidden");
   }, [task.getNote()]);
 
+  function setCurrentTittle() {
+    const currentTaskID = document.querySelector(".current__task");
+    const currentTaskTittle = document.querySelector(".target__heading-tittle");
+    // console.log("current task id: ", currentTaskID)
+    // console.log("current task tittle: ", currentTaskTittle)
+    if (!currentTaskID || !currentTaskTittle) return;
+
+    // update inner text
+    currentTaskID.innerHTML = "#" +  task.getId().toString();
+    currentTaskTittle.innerHTML = task.getName();
+  }
+
   return (
     <div className="task__item ">
-      <div className="task__item-wrapper">
+      <div className="task__item-wrapper cursor-pointer "
+      onClick={() => setCurrentTittle()}
+      >
         <div className="task__item-main flex justify-between">
           <button
             className="checkIcon__wrapper"
