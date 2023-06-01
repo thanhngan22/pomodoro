@@ -26,11 +26,16 @@ const Pomofocus: React.FC = () => {
   const [mins, setMins] = useState<number>(User.mode.getTimeMins());
   const [secs, setSecs] = useState<number>(User.mode.getTimeSecs());
   const [pause, setPause] = useState<boolean>(true);
-  const intervalId = useRef<NodeJS.Timeout | null>(null);
+
   const [numTaskDone, setNumTasksDone] = useState<number>(User.todolist.getTotalNumTasksDone());
   const [numTasks, setNumTasks] = useState<number>(User.todolist.getNumTaskUnFinish());
   const [timeFinish, setTimeFinish] = useState<string>(User.getTimeFinish());
   const [totalTime, setTotalTime] = useState<number>(Math.round(User.getTimeTodo()/60 *10)/10);
+
+  const [currentTaskId, setCurrentTaskId] = useState<string>("#1");
+  const [target, setTarget] = useState<string>("Time to focus !");
+
+  const intervalId = useRef<NodeJS.Timeout | null>(null);
 
   // time format to display
   const timeShow =
@@ -270,8 +275,8 @@ const Pomofocus: React.FC = () => {
         </div>
       </div>
       <div className="target__heading text-center py-4">
-        <div className="current__task opacity-70 text-l">#1</div>
-        <h1 className="target__heading-title">Time to focus !</h1>
+        <div className="current__task opacity-70 text-l">{currentTaskId}</div>
+        <h1 className="target__heading-title"> {target} </h1>
       </div>
       <div className="tasks__menu flex justify-between pb-5 border-b border-gray-300">
         <h2 className="font-medium text-xl">Tasks</h2>
