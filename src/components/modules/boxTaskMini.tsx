@@ -2,8 +2,8 @@ import threeDotsBlackIcon from "../../assets/icons/3dots.black.png";
 import BoxUpdateTask from "./boxUpdateTask";
 import { CTask, CUserSetting } from "../../interface";
 
-
 // hooks
+import { useEffect } from "react";
 
 interface IProp {
   task: CTask;
@@ -11,8 +11,7 @@ interface IProp {
   onUserChange?: (newUser: CUserSetting) => void;
 }
 
-const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
-
+const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange }) => {
   const status = task.status === "finished" ? "finished__task" : "";
   const checked = task.status === "finished" ? "checked" : "";
 
@@ -34,7 +33,6 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
     // console.log("list :: ", user.todolist.list)
     // console.log("task id: ", task.getId())
 
-
     if (inputTaskNameElement.classList.contains("finished__task")) {
       cloneUser.todolist.list[task.getId() - 1].setStatus("unfinished");
 
@@ -47,7 +45,6 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
     }
 
     onUserChange && onUserChange(cloneUser);
-
   }
 
   function showBoxEditTask() {
@@ -55,6 +52,20 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
     const className = ".box-task__item--" + task.id;
     const parentElement = document.querySelector(className);
     if (!parentElement) return;
+
+    // if has notes, show notes and hidden btn add notes
+    const notesElement = parentElement.querySelector(".notes__content");
+    if (!notesElement) return;
+    const addNotesBtn = parentElement.querySelector(".update__more--btn");
+    if (!addNotesBtn) return;
+
+    if (task.getNote() !== "") {
+      notesElement.classList.remove("hidden");
+      addNotesBtn.classList.add("hidden");
+    } else {
+      notesElement.classList.add("hidden");
+      addNotesBtn.classList.remove("hidden");
+    }
 
     // from parent element, find box update task element
     const boxEditTask = parentElement.querySelector(".box__edit-specific-task");
@@ -70,12 +81,25 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
         taskItemMain.classList.add("hidden");
 
         // remove padding
-        taskItemMain.setAttribute("style", "padding: 0px;")
+        taskItemMain.setAttribute("style", "padding: 0px;");
       }
 
       boxEditTask.classList.remove("hidden");
-    } 
+    }
   }
+
+  useEffect(() => {
+    const className = ".box-task__item--" + task.id;
+    const parentElement = document.querySelector(className);
+    if (!parentElement) return;
+    const element = parentElement.querySelector(".task__note");
+    if (!element) return;
+    if (task.getNote() === "") {
+      element.classList.add("hidden");
+      return;
+    }
+    element.classList.remove("hidden");
+  }, [task.getNote()]);
 
   return (
     <div className="task__item ">
@@ -88,22 +112,25 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
             <div className={`checkIcon__container ${checked} `}></div>
           </button>
           <div className="task__content w-5/6  flex items-center ">
-            <span className={`task__name text-black px-2 font-semibold opacity-85 ${status}`}>
+            <span
+              className={`task__name text-black px-2 font-semibold opacity-85 ${status}`}
+            >
               {task.getName()}
             </span>
           </div>
           <div className="task__config flex justify-between items-center">
             <div className="task__count text-gray-700 opacity-80  ">
-            <span className="num__task-done font-semibold">
-              {task.getNumTasksDone()}
-            </span>
-            <span className="text-xs font-semibold divide-items">/</span>
-            <span className="task-quantity font-semibold opacity-80  ">
-            {task.getQuantity()}
-            </span>
+              <span className="num__task-done font-semibold">
+                {task.getNumTasksDone()}
+              </span>
+              <span className="text-xs font-semibold divide-items">/</span>
+              <span className="task-quantity font-semibold opacity-80  ">
+                {task.getQuantity()}
+              </span>
             </div>
-            <button className="border rounded px-1.5 py-1.5 w-8 h-8  "
-            onClick={() => showBoxEditTask()}
+            <button
+              className="border rounded px-1.5 py-1.5 w-8 h-8  "
+              onClick={() => showBoxEditTask()}
             >
               <img
                 src={threeDotsBlackIcon}
@@ -113,14 +140,17 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange}) => {
             </button>
           </div>
         </div>
-        <div className="task__note bg-yellow-100 py-3 ml-5 mt-3 hidden ">
-          <span className="task__note-content">
+        <div className="task__note bg-yellow-100 py-2 ml-5 mt-2 rounded px-3 hidden">
+          <span
+            className="task__note-content text-red-400 text-sm 
+          "
+          >
             {task.getNote()}
           </span>
         </div>
       </div>
       <div className="hidden box__edit-specific-task">
-        <BoxUpdateTask task={task} user={user} onUserChange={onUserChange}/>
+        <BoxUpdateTask task={task} user={user} onUserChange={onUserChange} />
       </div>
     </div>
   );

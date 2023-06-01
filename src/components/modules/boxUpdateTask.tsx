@@ -64,6 +64,18 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
           temp.setNote(note);
 
           cloneUser.todolist.push(temp);
+          // reset notes 
+          setNote("");
+          // hide add notes
+          const notes = addTaskBox?.querySelector(".notes__content");
+          if (notes) {
+            notes.classList.add("hidden");
+            const addNotesBtn = addTaskBox?.querySelector(".update__more--btn");
+            if (addNotesBtn) {
+              addNotesBtn.classList.remove("hidden");
+            }
+          }
+
         } else {
           // update task
           task.setName(nameTask);
@@ -106,7 +118,7 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
         taskItemMain.setAttribute("style", "padding: 16px;");
       }
     }
-    console.log("has onUserChange")
+    console.log("has onUserChange");
     onUserChange && onUserChange(cloneUser);
   }
 
@@ -139,6 +151,38 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
     parseInt(e.target.value) >= 1
       ? setQuantityStr(parseInt(e.target.value).toString())
       : setQuantityStr("1");
+  }
+
+  function addNotes() {
+    const className = ".box-task__item--" + task.id;
+    console.log("className: ", className);
+    const parentElement = document.querySelector(className);
+
+    if (parentElement == null) {
+      // case add task
+      const addTaskBox = document.querySelector(".add__task-box");
+      const notes = addTaskBox?.querySelector(".notes__content");
+      if (!notes) return;
+      notes.classList.remove("hidden");
+      // hide btn add note
+      const addNotesBtn = addTaskBox?.querySelector(".update__more--btn");
+      console.log("addNotesBtn: ", addNotesBtn);
+      if (!addNotesBtn) return;
+      addNotesBtn.classList.add("hidden");
+      return;
+    }
+
+
+    console.log("parentElement: ", parentElement);
+    const addNoteElement = parentElement?.querySelector(".notes__content")
+    console.log("addNoteElement: ", addNoteElement);
+    if (!addNoteElement) return;
+    addNoteElement.classList.remove("hidden");
+
+    // hide button add note
+    const addNotesBtn = document.querySelector(".update__more--btn");
+    if (!addNotesBtn) return;
+    addNotesBtn.classList.add("hidden");
   }
 
   return (
@@ -205,10 +249,27 @@ const BoxUpdateTask: React.FC<IProp> = ({ task, user, onUserChange }) => {
           </div>
         </div>
         <div className="update__more font-semibold text-sm text-gray-700 opacity-80">
-          <button className="update__more--btn mr-3 underline">
-            + Add Note
-          </button>
-          <button className="update__more--btn underline">+ Add Project</button>
+          <div>
+            <textarea
+              name="note"
+              placeholder="some notes ..."
+              value={note}
+              className=" notes__content bg-slate-300 w-full rounded px-2 py-1 placeholder:font-thin placeholder:text-sm placeholder:text-gray-500 text-base font-normal outline-none hidden"
+              onChange={(e) => setNote(e.target.value)}
+            ></textarea>
+          </div>
+          <div className="py-2">
+            <button
+              className="update__more--btn mr-3 underline"
+              onClick={() => addNotes()}
+            >
+              + Add Note
+            </button>
+
+            <button className="update__more--btn underline">
+              + Add Project
+            </button>
+          </div>
           <div className="update__more-icon"></div>
         </div>
       </div>
