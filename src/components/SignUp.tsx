@@ -41,13 +41,13 @@ function SignUp() {
           </div>
           <h2 className="text-white text-4xl opacity-90">Pomofocus</h2>
         </Link>
-        <h3 className="signup__box-subTittle text-white font-semibold text-xl text-center opacity-80 ">
+        <h3 className="signup__box-subTittle text-white text-lg text-center opacity-80 ">
           Create Account
         </h3>
         <div className="signup__form-container my-10 border rounded-lg bg-white ">
           <div className="signup__form ">
-            <div className="flex justify-center py-4">
-            <button className="signup__google-btn flex items-center bg-slate-300 px-4 py-2 rounded-lg">
+            <div className="flex justify-center py-6">
+            <button className="signup__google-btn flex items-center bg-slate-300 px-3 py-1 rounded-lg ">
               <img src={googleLogo} alt="google" className="w-4 h-4 mr-1 rounded-full " />
               <span className="text-gray-600 font-semibold">Signup with Google</span>
             </button>
@@ -76,14 +76,14 @@ function SignUp() {
               </div>
              
               <div className="form__group flex justify-center mx-1">
-                <button className="signup__button text-white bg-black opacity-80 font-semibold w-full py-2 rounded-lg my-5">Sign up with Email</button>
+                <button className="signup__button text-white bg-black opacity-80 font-semibold w-full py-2 rounded-lg mt-5">Sign up with Email</button>
               </div>
           
             </div>
           </div>
         </div>
         <div className="signup__box-footer my-10 flex flex-col items-center">
-          <span className="text-gray-800">Already have an account?</span>
+          <span className="text-white opacity-60">Already have an account?</span>
           <span>
             <Link to="/login" className="text-blue-400 underline font-semibold">
               Login
