@@ -15,15 +15,15 @@ export default function Nav() {
           <h1 className="text-xl font-bold">Pomofocus</h1>
         </Link>
         <div className="nav__menu flex h-8 items-center  ">
-          <button className="nav__menu-item nav__report  ">
+          <button className="nav__menu-item nav__report hover:bg-gray-500  ">
             <img src={graphIcon} alt="graph" className="w-4 h-4 mr-1 " />
             <span>Report</span>
           </button>
-          <button className="nav__menu-item nav__setting ">
+          <button className="nav__menu-item nav__setting hover:bg-gray-500 ">
             <img src={settingIcon} alt="setting" className="w-4 h-4 mr-1 " />
             <span>Setting</span>
           </button>
-          <Link to='/login' className="nav__menu-item nav__login ">
+          <Link to='/login' className="nav__menu-item nav__login hover:bg-gray-500 ">
             <img src={userIcon} alt="user" className="w-4 h-4 mr-1 " />
             <span>Login</span>
           </Link>

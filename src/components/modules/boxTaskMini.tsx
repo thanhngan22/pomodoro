@@ -109,18 +109,19 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange }) => {
     if (!currentTaskID || !currentTaskTittle) return;
 
     // update inner text
-    currentTaskID.innerHTML = "#" +  task.getId().toString();
+    currentTaskID.innerHTML = "#" + task.getId().toString();
     currentTaskTittle.innerHTML = task.getName();
   }
 
   return (
-    <div className="task__item ">
-      <div className="task__item-wrapper cursor-pointer "
-      onClick={() => setCurrentTittle()}
+    <div className="task__item">
+      <div
+        className="task__item-wrapper cursor-pointer "
+        onClick={() => setCurrentTittle()}
       >
         <div className="task__item-main flex justify-between">
           <button
-            className="checkIcon__wrapper"
+            className="checkIcon__wrapper hover:opacity-60"
             onClick={() => markFinishedTask()}
           >
             <div className={`checkIcon__container ${checked} `}></div>
@@ -143,7 +144,7 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange }) => {
               </span>
             </div>
             <button
-              className="border rounded px-1.5 py-1.5 w-8 h-8  "
+              className="border rounded px-1.5 py-1.5 w-8 h-8 hover:bg-gray-200  "
               onClick={() => showBoxEditTask()}
             >
               <img
@@ -154,7 +155,7 @@ const BoxTaskMini: React.FC<IProp> = ({ task, user, onUserChange }) => {
             </button>
           </div>
         </div>
-        <div className="task__note bg-yellow-100 py-2 ml-5 mt-2 rounded px-3 hidden">
+        <div className="task__note bg-yellow-100 py-2 ml-9 mt-1 rounded px-3 hidden">
           <span
             className="task__note-content text-red-400 text-sm 
           "

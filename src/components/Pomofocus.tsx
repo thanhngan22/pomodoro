@@ -224,22 +224,22 @@ const Pomofocus: React.FC = () => {
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
       <div className="display__timer items-center flex flex-col">
-        <div className="pomo__break-types pt-4">
+        <div className="pomo__break-types pt-4 ">
           <button
             onClick={() => handleOnclickTypesPomo("pomodoro")}
-            className="pomodoro__main-btn pomo__types-btn -ml-3 "
+            className="pomodoro__main-btn pomo__types-btn -ml-3 hover:opacity-70  "
           >
             Pomodoro
           </button>
           <button
             onClick={() => handleOnclickTypesPomo("short-break")}
-            className="Short__Break-btn pomo__types-btn "
+            className="Short__Break-btn pomo__types-btn hover:opacity-70 "
           >
             Short Break
           </button>
           <button
             onClick={() => handleOnclickTypesPomo("long-break")}
-            className="Long__Break-btn pomo__types-btn -mr-3"
+            className="Long__Break-btn pomo__types-btn -mr-3 hover:opacity-70"
           >
             Long Break
           </button>
@@ -249,7 +249,7 @@ const Pomofocus: React.FC = () => {
           <div className="">
             <button
               onClick={() => handleClickStartBtn()}
-              className="start__button "
+              className="start__button hover:opacity-90 "
             >
               START
             </button>
@@ -257,7 +257,7 @@ const Pomofocus: React.FC = () => {
           <div className="w-20"></div>
           <div className=" ">
             <button
-              className="next__mode-btn  w-8 h-8"
+              className="next__mode-btn  w-8 h-8 hover:opacity-70"
               onClick={() => switchNextMode()}
             >
               <div className="next-mode__icon--wrapper">
@@ -275,9 +275,9 @@ const Pomofocus: React.FC = () => {
         <div className="current__task opacity-70 text-l">#1</div>
         <h1 className="target__heading-tittle"> Time to focus ! </h1>
       </div>
-      <div className="tasks__menu flex justify-between pb-5 border-b border-gray-300">
+      <div className="tasks__menu flex justify-between pb-5 border-b border-gray-300 ">
         <h2 className="font-medium text-xl">Tasks</h2>
-        <button className="tasks__menu-action px-3 py-3 ">
+        <button className="tasks__menu-action px-3 py-3 hover:opacity-70 ">
           <img src={threeDotsIcon} alt="thee-dots-icon" className="w-4 h-4" />
         </button>
       </div>
@@ -293,7 +293,7 @@ const Pomofocus: React.FC = () => {
           />
         </div>
         <button
-          className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80"
+          className="add__task-btn flex justify-center font-semibold m-auto w-full h-16 opacity-80 hover:opacity-50"
           onClick={() => handleOnClickAddTask()}
         >
           <img
