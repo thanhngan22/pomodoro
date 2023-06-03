@@ -6,6 +6,14 @@ import threeDotsIcon from "../assets/icons/3dots.png";
 import plusIcon from "../assets/icons/plus.png";
 import nextModeIcon from "../assets/icons/next-mode.png";
 
+import clearBlackIcon from "../assets/icons/clear-black.png";
+import plusBlackIcon from "../assets/icons/plus-black.png";
+import saveBlackIcon from "../assets/icons/save-black2.png";
+import deleteBlackIcon from "../assets/icons/delete-black.png";
+import integrationBlackIcon from "../assets/icons/integration-black.png";
+import lockBlackIcon from "../assets/icons/lock-black.png";
+
+
 // interfaces and classes
 import { CUserSetting, CTask } from "../interface";
 
@@ -221,6 +229,17 @@ const Pomofocus: React.FC = () => {
     inputElement.focus();
   }
 
+  // show setting box when click on button setting 
+function showSettingBox() {
+  console.log("show setting box");
+    const tasksSetting = document.querySelector(".tasks__setting");
+    if (!tasksSetting) return;
+    tasksSetting.classList.remove("hidden");
+
+}
+
+
+
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
       <div className="display__timer items-center flex flex-col">
@@ -276,10 +295,44 @@ const Pomofocus: React.FC = () => {
         <h1 className="target__heading-tittle"> Time to focus ! </h1>
       </div>
       <div className="tasks__menu flex justify-between pb-5 border-b border-gray-300 ">
-        <h2 className="font-medium text-xl">Tasks</h2>
-        <button className="tasks__menu-action px-3 py-3 hover:opacity-70 ">
+       <h2 className="font-medium text-xl">Tasks</h2>
+       <div className="relative">
+        <button className="tasks__menu-action px-3 py-3 hover:opacity-70 "
+        onClick={() => showSettingBox()}
+        >
           <img src={threeDotsIcon} alt="thee-dots-icon" className="w-4 h-4" />
         </button>
+        <div className="tasks__setting hidden">
+          <div className="tasks__setting-box">
+              <div className="tasks__setting-item">
+                <img src={deleteBlackIcon} alt="delete-icon" className="w-4 h-4" />
+                Clear finished tasks
+              </div>
+              <div className="tasks__setting-item">
+                <img src={clearBlackIcon} alt="clear-icon" className="w-4 h-4" />
+                Clear act pomodoros
+              </div>
+              <div className="tasks__setting-item">
+                <img src={saveBlackIcon} alt="save-icon" className="w-4 h-4" />
+                Save as template
+
+              </div>
+              <div className="tasks__setting-item">
+                <img src={plusBlackIcon } alt="plus-icon" className="w-4 h-4" />
+                Add from templates
+              </div>
+              <div className="tasks__setting-item tasks__setting-item--import">
+                <img src={integrationBlackIcon} alt="integration-icon" className="w-4 h-4 " />
+                Import from Todolist 
+                <img src={lockBlackIcon} alt="lock-icon" className="w-4 h-4 opacity-60 icon-right" />
+              </div>
+              <div className="tasks__setting-item border-t border-slate-200">
+                <img src={deleteBlackIcon} alt="delete-icon" className="w-4 h-4" />
+                Clear all tasks
+              </div>
+            </div>
+        </div>
+       </div>
       </div>
       <div className="tasks__list my-5">
         <ShowListTasks user={User} onUserChange={handleOnChangeUser} />
