@@ -13,7 +13,6 @@ import deleteBlackIcon from "../assets/icons/delete-black.png";
 import integrationBlackIcon from "../assets/icons/integration-black.png";
 import lockBlackIcon from "../assets/icons/lock-black.png";
 
-
 // interfaces and classes
 import { CUserSetting, CTask } from "../interface";
 
@@ -35,10 +34,16 @@ const Pomofocus: React.FC = () => {
   const [secs, setSecs] = useState<number>(User.mode.getTimeSecs());
   const [pause, setPause] = useState<boolean>(true);
 
-  const [numTaskDone, setNumTasksDone] = useState<number>(User.todolist.getTotalNumTasksDone());
-  const [numTasks, setNumTasks] = useState<number>(User.todolist.getNumTaskUnFinish());
+  const [numTaskDone, setNumTasksDone] = useState<number>(
+    User.todolist.getTotalNumTasksDone()
+  );
+  const [numTasks, setNumTasks] = useState<number>(
+    User.todolist.getNumTaskUnFinish()
+  );
   const [timeFinish, setTimeFinish] = useState<string>(User.getTimeFinish());
-  const [totalTime, setTotalTime] = useState<number>(Math.round(User.getTimeTodo()/60 *10)/10);
+  const [totalTime, setTotalTime] = useState<number>(
+    Math.round((User.getTimeTodo() / 60) * 10) / 10
+  );
 
   const intervalId = useRef<NodeJS.Timeout | null>(null);
 
@@ -125,7 +130,7 @@ const Pomofocus: React.FC = () => {
     setNumTasks(User.todolist.getNumTaskUnFinish());
     setNumTasksDone(User.todolist.getTotalNumTasksDone());
     setTimeFinish(User.getTimeFinish());
-    setTotalTime(Math.round(User.getTimeTodo()/60 *10)/10);
+    setTotalTime(Math.round((User.getTimeTodo() / 60) * 10) / 10);
 
     // write to local storage
     localStorage.setItem("userData", JSON.stringify(User, null, 2));
@@ -229,16 +234,36 @@ const Pomofocus: React.FC = () => {
     inputElement.focus();
   }
 
-  // show setting box when click on button setting 
-function showSettingBox() {
-  console.log("show setting box");
+  // show setting box when click on button setting
+  function showSettingBox(e: any) {
+    e.stopPropagation();
+    console.log("show /hide setting box");
     const tasksSetting = document.querySelector(".tasks__setting");
+    // console.log(tasksSetting);
     if (!tasksSetting) return;
-    tasksSetting.classList.remove("hidden");
+    if (!tasksSetting.classList.contains("hidden")) {
+      tasksSetting.classList.add("hidden");
+    } else {
+      tasksSetting.classList.remove("hidden");
+    }
+  }
 
-}
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const boxSetting = document.querySelector(".tasks__setting");
 
+      // console.log("click on ", e.target);
 
+      if (boxSetting?.classList.contains("hidden")) return;
+
+      // console.log("button" , buttonSetting)
+
+      if (e.target !== boxSetting) {
+        boxSetting?.classList.add("hidden");
+      }
+    });
+  }, []);
 
   return (
     <div className=" pomo__container flex flex-col pt-10 px-20 text-white ">
@@ -295,44 +320,64 @@ function showSettingBox() {
         <h1 className="target__heading-tittle"> Time to focus ! </h1>
       </div>
       <div className="tasks__menu flex justify-between pb-5 border-b border-gray-300 ">
-       <h2 className="font-medium text-xl">Tasks</h2>
-       <div className="relative">
-        <button className="tasks__menu-action px-3 py-3 hover:opacity-70 "
-        onClick={() => showSettingBox()}
-        >
-          <img src={threeDotsIcon} alt="thee-dots-icon" className="w-4 h-4" />
-        </button>
-        <div className="tasks__setting hidden">
-          <div className="tasks__setting-box">
+        <h2 className="font-medium text-xl">Tasks</h2>
+        <div className="relative">
+          <button
+            className="tasks__menu-action px-3 py-3 hover:opacity-70 "
+            onClick={(e) => showSettingBox(e)}
+          >
+            <img src={threeDotsIcon} alt="thee-dots-icon" className="w-4 h-4" />
+          </button>
+          <div className="tasks__setting hidden">
+            <div className="tasks__setting-box">
               <div className="tasks__setting-item">
-                <img src={deleteBlackIcon} alt="delete-icon" className="w-4 h-4" />
+                <img
+                  src={deleteBlackIcon}
+                  alt="delete-icon"
+                  className="w-4 h-4"
+                />
                 Clear finished tasks
               </div>
               <div className="tasks__setting-item">
-                <img src={clearBlackIcon} alt="clear-icon" className="w-4 h-4" />
+                <img
+                  src={clearBlackIcon}
+                  alt="clear-icon"
+                  className="w-4 h-4"
+                />
                 Clear act pomodoros
               </div>
               <div className="tasks__setting-item">
                 <img src={saveBlackIcon} alt="save-icon" className="w-4 h-4" />
                 Save as template
-
               </div>
               <div className="tasks__setting-item">
-                <img src={plusBlackIcon } alt="plus-icon" className="w-4 h-4" />
+                <img src={plusBlackIcon} alt="plus-icon" className="w-4 h-4" />
                 Add from templates
               </div>
               <div className="tasks__setting-item tasks__setting-item--import">
-                <img src={integrationBlackIcon} alt="integration-icon" className="w-4 h-4 " />
-                Import from Todolist 
-                <img src={lockBlackIcon} alt="lock-icon" className="w-4 h-4 opacity-60 icon-right" />
+                <img
+                  src={integrationBlackIcon}
+                  alt="integration-icon"
+                  className="w-4 h-4 "
+                />
+                Import from Todolist
+                <img
+                  src={lockBlackIcon}
+                  alt="lock-icon"
+                  className="w-4 h-4 opacity-60 icon-right"
+                />
               </div>
               <div className="tasks__setting-item border-t border-slate-200">
-                <img src={deleteBlackIcon} alt="delete-icon" className="w-4 h-4" />
+                <img
+                  src={deleteBlackIcon}
+                  alt="delete-icon"
+                  className="w-4 h-4"
+                />
                 Clear all tasks
               </div>
             </div>
+          </div>
         </div>
-       </div>
       </div>
       <div className="tasks__list my-5">
         <ShowListTasks user={User} onUserChange={handleOnChangeUser} />
@@ -359,13 +404,19 @@ function showSettingBox() {
       </div>
       <div className="more__inf text-center flex  justify-center font-semibold">
         <p className="pomos pl-1 pr-10">
-          <span> {"Pomos: "} { numTaskDone}</span>
+          <span>
+            {" "}
+            {"Pomos: "} {numTaskDone}
+          </span>
           <span className="text-xs divide-items">/</span>
           <span>{numTasks}</span>
         </p>
         <p className="finishAt">
-       <span className="">{" Finish at: "}{timeFinish}</span>
-       <span className="text-xs font-normal pl-1">{`(${totalTime} h) `}</span>
+          <span className="">
+            {" Finish at: "}
+            {timeFinish}
+          </span>
+          <span className="text-xs font-normal pl-1">{`(${totalTime} h) `}</span>
         </p>
       </div>
     </div>

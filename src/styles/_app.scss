@@ -287,3 +287,10 @@
     }
   }
 }
+
+
+.tasks__menu-action {
+  &:active {
+    animation: move-down 0.3s ease-in-out;
+  }
+}
